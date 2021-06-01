@@ -1,0 +1,71 @@
+#
+#
+#
+#
+#
+
+#CLASE
+class Licencia:
+    def __init__(self):
+        self.cedula=0
+        self.nombreCompleto=""
+        self.fechaNacimiento=""
+        self.fechaExpedicion=""
+        self.fechaVencimiento=""
+        self.tipoLicencia=""
+        self.tipoSangre=""
+        self.donador=False
+        self.sede=""
+        self.puntaje=0
+        self.correo=""
+    #SET
+    def asignarCedula(self,pCedula):
+        self.cedula=pCedula
+    def asignarNombreCompleto(self,pNombreCompleto):
+        self.nombreCompleto=pNombreCompleto
+    def asignarFechaNacimiento(self,pfechaNacimiento):
+        self.fechaNacimiento=pfechaNacimiento
+    def asignarFechaExpedicion(self,pfechaExpedicion):
+        self.fechaExpedicion=pfechaExpedicion
+    def asignarFechaVencimiento(self,pfechaVencimiento):
+        self.fechaVencimiento=pfechaVencimiento
+    def asignarTipoLicencia(self,ptipoLicencia):
+        self.tipoLicencia=ptipoLicencia
+    def asignarTipoSangre(self,ptipoSangre):
+        self.tipoSangre=ptipoSangre
+    def asignarDonador(self,pdonador):
+        self.donador=pdonador
+    def asignarSede(self,psede):
+        self.sede=psede
+    def asignarPuntaje(self,ppuntaje):
+        self.puntaje=ppuntaje
+    def asignarCorreo(self,pcorreo):
+        self.correo=pcorreo
+    #GET
+    def obtenerCedula(self):
+        return self.cedula
+    def obtenerNombreCompleto(self):
+        return self.nombreCompleto
+    def obtenerFechaNacimiento(self):
+        return self.fechaNacimiento
+    def obtenerFechaExpedicion(self):
+        return self.fechaExpedicion
+    def obtenerFechaVencimiento(self):
+        return self.fechaVencimiento
+    def obtenerTipoLicencia(self):
+        return self.tipoLicencia
+    def obtenerTipoSangre(self):
+        return self.tipoSangre
+    def obtenerDonador(self):
+        return self.donador
+    def obtenerSede(self):
+        return self.sede
+    def obtenerPuntaje(self):
+        return self.puntaje
+    def obtenerCorreo(self):
+        return self.correo
+sebastian=Licencia()
+sebastian.asignarCedula(1)
+lista=[]
+lista.append(sebastian)
+print(sebastian.obtenerCedula())
