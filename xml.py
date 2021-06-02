@@ -3,134 +3,154 @@
 #Última modificación: XX/06/2021 
 #Versión: 3.9.2
 
-#IMPORTACIONES
-from bs4 import BeautifulSoup
-import requests
-import pandas as pd
-from archivos import *
-#FUNCIONES HTML - XML
-def obtenerCategorias():
-    """
-    Función: Obtener las categorias de licencias de la página web.
-    Entrada: N/A.
-    Salida: 
-    -categorias(list): Lista de categorias.
-    """
-    url="https://practicatest.cr/blog/licencias/tipos-licencia-conducir-costa-rica"
-    page=requests.get(url)#manda a traer toda la info del url.
-    soup = BeautifulSoup(page.content,"html.parser")#
-    #Licencias
-    licencias=soup.find_all("h2")#Obtiene todas las etiquetas h2.
-    categorias= list()#lita para guardar las categorias.
-    contadorCategoria=0#porque hay un h2 anterior a este que se está guardando.
-    for i in licencias:#saca cada una de las h2.
-        if contadorCategoria==0:#para quitar ese vacío que está de primero.
-            contadorCategoria+=1
-            continue
-        categorias.append(i.text)#obtiene solo el contenido que está en el h2.
-        contadorCategoria+=1
-    return categorias
-def obtenerSubcategorias():
-    """
-    Función: Obtener todas las subcategorias.
-    Entrada: N/A.
-    Salida: 
-    -subCategoriaLimpia: Lista de subcategorias.
-    """
-    url="https://practicatest.cr/blog/licencias/tipos-licencia-conducir-costa-rica"
-    page=requests.get(url)#manda a traer toda la info del url.
-    soup = BeautifulSoup(page.content,"html.parser")#
-    #Subcategorias
-    subLiencias=soup.find_all("h3")#encuentra las etiquetas con h3.
-    subCategorias=list()#crea la lista para guardar el contenido de todas las h3.
-    contadorCategoria=0#inicia contador para escoger solo las h3 que se ocupa.
-    subLiencias=subLiencias[10:]
-    for j in subLiencias:#ciclo para sacar solo las h3 que se requiere.
-        subCategorias.append(j.text)#guarda el texto de las h3.
-        contadorCategoria+=1
-    subCategoriaLimpia=[]#lista para guardar las lista limpia, porque está arrastrando \n al final de casi todas.
-    contadorCategoria=0
-    for k in subCategorias:
-        if contadorCategoria==1 or contadorCategoria==2 or contadorCategoria==3 or contadorCategoria==4 or contadorCategoria==5 or contadorCategoria==6 or contadorCategoria==7 or contadorCategoria==8 or contadorCategoria==12 or contadorCategoria==13:
-            subCategoriaLimpia.append(k[0:-1])
-            contadorCategoria+=1
-            continue
-        subCategoriaLimpia.append(k)
-        contadorCategoria+=1
-    return subCategoriaLimpia
-def obtenerComentarios():
-    """
-    Función: Obtener los comentarios de cada subcategoria de licencia.
-    Entrada: N/A.
-    Salida:
-    -comentarioTexto(list): Lista de comentarios.
-    """
-    url="https://practicatest.cr/blog/licencias/tipos-licencia-conducir-costa-rica"
-    page=requests.get(url)#manda a traer toda la info del url.
-    soup = BeautifulSoup(page.content,"html.parser")#
-    #Comentarios
-    comentarios=soup.find_all("p")
-    comentarioTexto=list()
-    contadorCategoria=0#reincia al contador
-    comentarios=comentarios[18:]#Corta la lista para coger solo los comentarios.
-    limpiar=[0,4,8,16,17,18,22,26,31,38,43,51,54,67,74]#lista de los que hay que limpiar.
-    buenos=[0,4,8,15,16,16,17,18,22,26,31,38,43,53,54,59,63,67,74]#todos los indices que tienen texto
-    for n in comentarios:#saca los <p>
-        if contadorCategoria in buenos:#buscamos los nos sirven.
-            if contadorCategoria in limpiar:#los que tienen \n al final
-                comentarioTexto.append(n.text[0:-1])#quita el \n
-            else:
-                comentarioTexto.append(n.text)
-        contadorCategoria+=1
-    comentarioTexto.append("Permite manejar todo tipo de vehículo, excepto los de transporte público.")#NO LO ESTA AGARRANDO
-    return comentarioTexto
-def obtenerRequisitos():
-    """
-    Función: Obtener los requisitos de cada subcategoria de licencia.
-    Entrada: N/A.
-    Salida: 
-    -requisitosTexto(list): Lista de requisitos
-    """
-    url="https://practicatest.cr/blog/licencias/tipos-licencia-conducir-costa-rica"
-    page=requests.get(url)#manda a traer toda la info del url.
-    soup = BeautifulSoup(page.content,"html.parser")#
-    #REQUISITOS
-    requisitos=soup.find_all("ul")
-    requisitosTexto=list()
-    contadorCategoria=0#reincia al contador
-    requisitosListo=[8,9,11,11,12,13,14,15,16,17,18,19]
-    listaRequisitosLimpiar=[6,7,8,9]
-    for g in requisitos:
-        if contadorCategoria in requisitosListo:
-            if contadorCategoria==11:
-                requisitosTexto.append("Ser mayor de 18 años.\nCédula o documento de identificación original del aspirante.\nDictamen médico digital para licencia de conducir clase A3.\nHacer examen teórico y examen práctico para licencia de conducir A3.")
-            if contadorCategoria in listaRequisitosLimpiar:
-                requisitosTexto.append(g.text[0:-1])
-            else:
-                requisitosTexto.append(g.text)
-        contadorCategoria+=1
-    return requisitosTexto
-def crearListaInformacion():
-    """
-    Función: Crear lista con la información requerida de la página web.
-    Entrada: N/A.
-    Salida:
-    -[A,B,C,D](list): Matriz con todas las categorias, subcategorias, comentarios y requisitos según cada licencia.
-    """
-    categorias=obtenerCategorias()
-    subCategorias=obtenerSubcategorias()
-    comentarios=obtenerComentarios()
-    requisitos=obtenerRequisitos()
-    A=[categorias[0],[subCategorias[0],subCategorias[1],subCategorias[2]],[comentarios[0],comentarios[1],comentarios[2]],[requisitos[0],requisitos[1],requisitos[2]]]
-    B=[categorias[1],[subCategorias[3],subCategorias[4],subCategorias[5],subCategorias[6]],[[comentarios[3],comentarios[4],comentarios[5],comentarios[6]],comentarios[7],comentarios[8],comentarios[9]],[requisitos[3],requisitos[4],requisitos[5],requisitos[6]]]
-    C=[categorias[2],[subCategorias[7],subCategorias[8]],[comentarios[10],comentarios[11]],[requisitos[7],requisitos[8]]]
-    D=[categorias[3],[subCategorias[9],subCategorias[10]],[comentarios[14],comentarios[15],comentarios[16]],requisitos[9]]
-    E=[categorias[4],[subCategorias[12],subCategorias[13]],[comentarios[17],comentarios[18]],[requisitos[10],requisitos[11]]]
-    #Lista de subCategorias de licencias.
-    listaSubCategoriaLicencias=[subCategorias[0],subCategorias[1],subCategorias[2],subCategorias[3],subCategorias[4],subCategorias[5],
-    subCategorias[7],subCategorias[8],subCategorias[9],subCategorias[10],subCategorias[12],subCategorias[13]]
+#FALTA CAMBIAR LOS TEXTOS EN NARANJA POR LO QUE ESTÄ EN LA LISTA informacionLicencias
 
-    graba("informacionLicencias",[A,B,C,D,E])#Graba toda la información de la página.
-    graba("subTiposLicencias",listaSubCategoriaLicencias)#Graba solo las subCategorias.
-    return 
-crearListaInformacion()
+#Importaciones
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+
+#Funciones XML
+ 
+#RAIZ
+licencias = ET.Element("licencias")#raiz.
+#####################################################################################################################
+#TIPO A
+tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia A")#Tipo A
+#SUBTIPO A1
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="A1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO A1
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario A1"
+#REQUISITOS A1
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito A2"
+
+#SUBTIPO A2
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="A2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO A2
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario A2"
+#REQUISITOS A2
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito A2"
+
+#SUBTIPO A3
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="A3")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO A3
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario A3"
+#REQUISITOS A3
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Comentario A3"
+#####################################################################################################################
+#TIPO B
+tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia B")#Tipo A
+#SUBTIPO B1
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO B1
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario B1"
+#REQUISITOS B1
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito B1"
+
+#SUBTIPO B2
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO B2
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario B2"
+#REQUISITOS B2
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito B2"
+
+#SUBTIPO B3
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B3")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO B3
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario B3"
+#REQUISITOS B3
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Comentario B3"
+
+#SUBTIPO B4
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B4")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO B4
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario B4"
+#REQUISITOS B3
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Comentario B4"
+#####################################################################################################################
+#TIPO C
+tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia C")#Tipo A
+#SUBTIPO C1
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="C1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO C1
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario C1"
+#REQUISITOS C1
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito C1"
+
+#SUBTIPO C2
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="C2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO C2
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario C2"
+#REQUISITOS C2
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito C2"
+
+#####################################################################################################################
+#TIPO D
+tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia D")#Tipo A
+#SUBTIPO D1
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="D1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO C1
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario D1"
+#REQUISITOS C1
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito D1"
+
+#SUBTIPO D2
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="D2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO D2
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario D2"
+#REQUISITOS D2
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito D2"
+
+#SUBTIPO D3
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="D3")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO D3
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario D3"
+#REQUISITOS D3
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito D3"
+#####################################################################################################################
+#TIPO E
+tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia E")#Tipo A
+#SUBTIPO E1
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="E1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO E1
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario E1"
+#REQUISITOS E1
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito E1"
+
+#SUBTIPO E2
+subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="E2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+#COMENTARIO E2
+comentario=ET.SubElement(subcategoria,"comentario")
+comentario.text = "Comentario E2"
+#REQUISITOS E2
+requisito=ET.SubElement(subcategoria,"requisito")
+requisito.text = "Requisito E2"
+#####################################################################################################################
+#Hace XML
+arbol = ET.ElementTree(licencias)#trae todo lo que está en licencia.
+arbol.write("XML.xml")#crea el xml
