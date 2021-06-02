@@ -63,8 +63,7 @@ class Licencia:
         return self.puntaje
     def obtenerCorreo(self):
         return self.correo
+"""
 sebastian=Licencia()
 sebastian.asignarCedula(1)
-lista=[]
-lista.append(sebastian)
-print(sebastian.obtenerCedula())
+print(sebastian.obtenerCedula())"""

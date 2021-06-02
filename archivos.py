@@ -1,5 +1,5 @@
 #Elaborado por: Felipe Obando y Sebastián Bermúdez.
-#Fecha elaboración: 01/06/2021 10:20 PM
+#Fecha elaboración: 02/06/2021 10:20 PM
 #Última modificación: XX/06/2021  
 #Versión: 3.9.2
 #Función que graba el archivo.
