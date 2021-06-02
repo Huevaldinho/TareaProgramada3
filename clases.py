@@ -1,10 +1,9 @@
-#
-#
-#
-#
-#
+#Elaborado por: Felipe Obando y Sebastián Bermúdez.
+#Fecha de creación: 01/06/2021
+#Última modificación: 
+#Versión: 3.9.2
 
-#CLASE
+#CLASE LICENCIA
 class Licencia:
     def __init__(self):
         self.cedula=0

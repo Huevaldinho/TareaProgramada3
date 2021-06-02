@@ -1,33 +1,12 @@
-#PRUEBAS INTERFAZ GRÄFICA CON POO
-"""from tkinter import *
-class Application(Frame):#hereda de clase Frame.
-    def __init__(self, master=None):#contructor. master es el contenedor del frame. master es root, está al final.
-        super().__init__(master)#llama al constructor de la clase Frame.
-        self.master = master #le dice que el frame está contenido en master(root).
-        self.master.geometry("300x300")
-        self.pack()
-        self.create_widgets()
-    def create_widgets(self):#crea botones
-        self.hi_there = Button(self)
-        self.hi_there["text"] = "Hello World\n(click me)"
-        self.hi_there["command"] = self.say_hi
-        self.hi_there.pack(side="top")
-        
-        #Boton de salida.
-        self.quit = Button(self, text="QUIT", fg="red",command=self.master.destroy)#se puede usar root.destroy
-        self.quit.pack(side="bottom")
+#Elaborado por: Felipe Obando y Sebastián Bermúdez.
+#Fecha de creación: 01/06/2021
+#Última modificación: 
+#Versión: 3.9.2
 
-    def say_hi(self):
-        print("hi there, everyone!")
-
-root = Tk()#crea la ventana principal.
-app = Application(master=root)#significa: cree objeto Aplication y se va a ubicar en root.
-app.mainloop()#comienza el ciclo de eventos de la ventana.
-"""
-
+#INTERFAZ GRÁFICA
+#importaciones
 from tkinter import Tk,Label,Button,Entry, Frame
 from typing import Collection
-
 
 class Menu(Frame):#hereda de la clase Frame.
 
@@ -74,8 +53,6 @@ class Menu(Frame):#hereda de la clase Frame.
         self.btnReporteExcel.grid(row=4,column=1,padx=10,pady=10)
         self.btnAcerca.grid(row=5,column=1,padx=10,pady=10)
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
-
-
 
 root = Tk()
 root.wm_title("Reporte de conductores")#titulo de la ventana
