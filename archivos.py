@@ -1,0 +1,37 @@
+#Elaborado por: Felipe Obando y Sebastián Bermúdez.
+#Fecha elaboración: 01/06/2021 10:20 PM
+#Última modificación: XX/06/2021  
+#Versión: 3.9.2
+#Función que graba el archivo.
+import pickle
+def graba(nombreArchivo,lista):
+    """
+    Función: Grabar/crear un archivo(base de datos).
+    Entradas:
+    -nombreArchivo(str): Nombre del archivo en el que se va a grabar/crear.
+    -lista(list): Lista que se va a guardar en el archivo.
+    Salida: N/A.
+    """
+    try:
+        f=open(nombreArchivo,"wb")
+        pickle.dump(lista,f)
+        f.close()
+    except:
+        print("Error al grabar el archivo: ", nombreArchivo)
+    return ""
+#Función que lee un archivo
+def lee (nomArchLeer):
+    """
+    Función: Grabar/crear un archivo(base de datos).
+    Entradas:
+    -nombreArchivo(str): Nombre del archivo que se va a cargar en la RAM.
+    Salida: 
+    -lista(list): Lista de donadores.
+    """
+    try:
+        f=open(nomArchLeer,"rb")
+        lista = pickle.load(f)
+        f.close()
+    except:
+        print("Error al leer el archivo: ", nomArchLeer)
+    return lista
