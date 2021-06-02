@@ -8,149 +8,147 @@
 #Importaciones
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+from archivos import *
 
-#Funciones XML
- 
-#RAIZ
-licencias = ET.Element("licencias")#raiz.
-#####################################################################################################################
-#TIPO A
-tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia A")#Tipo A
-#SUBTIPO A1
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="A1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO A1
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario A1"
-#REQUISITOS A1
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito A2"
-
-#SUBTIPO A2
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="A2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO A2
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario A2"
-#REQUISITOS A2
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito A2"
-
-#SUBTIPO A3
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="A3")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO A3
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario A3"
-#REQUISITOS A3
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Comentario A3"
-#####################################################################################################################
-#TIPO B
-tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia B")#Tipo A
-#SUBTIPO B1
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO B1
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario B1"
-#REQUISITOS B1
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito B1"
-
-#SUBTIPO B2
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO B2
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario B2"
-#REQUISITOS B2
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito B2"
-
-#SUBTIPO B3
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B3")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO B3
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario B3"
-#REQUISITOS B3
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Comentario B3"
-
-#SUBTIPO B4
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="B4")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO B4
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario B4"
-#REQUISITOS B3
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Comentario B4"
-#####################################################################################################################
-#TIPO C
-tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia C")#Tipo A
-#SUBTIPO C1
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="C1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO C1
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario C1"
-#REQUISITOS C1
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito C1"
-
-#SUBTIPO C2
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="C2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO C2
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario C2"
-#REQUISITOS C2
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito C2"
-
-#####################################################################################################################
-#TIPO D
-tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia D")#Tipo A
-#SUBTIPO D1
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="D1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO C1
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario D1"
-#REQUISITOS C1
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito D1"
-
-#SUBTIPO D2
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="D2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO D2
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario D2"
-#REQUISITOS D2
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito D2"
-
-#SUBTIPO D3
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="D3")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO D3
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario D3"
-#REQUISITOS D3
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito D3"
-#####################################################################################################################
-#TIPO E
-tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name="Licencia E")#Tipo A
-#SUBTIPO E1
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="E1")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO E1
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario E1"
-#REQUISITOS E1
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito E1"
-
-#SUBTIPO E2
-subcategoria= ET.SubElement(tipoLicencia,"subTipo",name="E2")#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
-#COMENTARIO E2
-comentario=ET.SubElement(subcategoria,"comentario")
-comentario.text = "Comentario E2"
-#REQUISITOS E2
-requisito=ET.SubElement(subcategoria,"requisito")
-requisito.text = "Requisito E2"
-#####################################################################################################################
-#Hace XML
-arbol = ET.ElementTree(licencias)#trae todo lo que está en licencia.
-arbol.write("XML.xml")#crea el xml
+#Función XML
+def crearXML():
+    """
+    Función: Crear archivo .xml
+    Entrada: N/A.
+    Salida: N/A.
+    """
+    #Trae la base de datos
+    info=lee("informacionLicencias")#Trae la información que está en la base de datos para crear el XML
+    #RAIZ
+    licencias = ET.Element("licencias")#raiz.
+    #####################################################################################################################
+    #TIPO A
+    tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name=info[0][0])#Tipo A
+    #Subtipo A1
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[0][1][0])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario A1
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[0][2][0]
+    #Requisito A1
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[0][3][0]
+    #Subtipo A2
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[0][1][1])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario A2
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[0][2][1]
+    #Requisito A2
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[0][3][1]
+    #Subtipo A3
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[0][1][2])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario A3
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[0][2][2]
+    #Requisito A3
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[0][3][2]
+    #####################################################################################################################
+    #TIPO B
+    tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name=info[1][0])#Tipo B
+    #Subtipo B1
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[1][1][0])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario B1
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[1][2][0][0]+info[1][2][0][1]+info[1][2][0][2]+info[1][2][0][3]
+    #Requisito B1
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[1][3][0]
+    #Subtipo B2
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[1][1][1])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario B2
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[1][2][1]
+    #Requisito B2
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[1][3][1]
+    #Subtipo B3
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[1][1][2])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario B3
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[1][2][2]
+    #Requisito B3
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[1][3][2]
+    #Subtipo B4
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[1][1][3])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario B4
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[1][2][3]
+    #Requisito B3
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[1][3][3]
+    #####################################################################################################################
+    #TIPO C
+    tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name=info[2][0])#Tipo C
+    #Subtipo C1
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[2][1][0])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario C1
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[2][2][0]
+    #Requisito C1
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[2][3][0]
+    #Subtipo C2
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[2][1][1])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario C2
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[2][2][1]
+    #Requisito C2
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[2][3][1]
+    #####################################################################################################################
+    #TIPO D
+    tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name=info[3][0])#Tipo D
+    #Subtipo D1
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[3][1][0])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario D1
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[3][2][0]
+    #Requisito D1
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[3][3]
+    #Subtipo D2
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[3][1][1])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario D2
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[3][2][1]
+    #Requisito D2
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[3][3]
+    #Subtipo D3
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[3][1][2])#el 1 debe ser 2
+    #Comentario D3
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[3][2][2]
+    #Requisito D3
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[3][3]
+    #####################################################################################################################
+    #TIPO E
+    tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name=info[4][0])#Tipo E
+    #Subtipo E1
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[4][1][0])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario E1
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[4][2][0]
+    #Requisito E1
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[4][3][0]
+    #Subtipo E2
+    subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[4][1][1])#CAMBIAR QUE ESTÄ EN NARANJA POR NOMBRES DE LA LISTA.
+    #Comentario E2
+    comentario=ET.SubElement(subcategoria,"comentario")
+    comentario.text = info[4][2][1]
+    #Requisito E2
+    requisito=ET.SubElement(subcategoria,"requisito")
+    requisito.text = info[4][3][1]
+    #####################################################################################################################
+    arbol = ET.ElementTree(licencias)#trae todo lo que está en licencia.
+    arbol.write("XML.xml")#crea el xml
+    return

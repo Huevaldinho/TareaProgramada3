@@ -124,13 +124,11 @@ def crearListaInformacion():
     A=[categorias[0],[subCategorias[0],subCategorias[1],subCategorias[2]],[comentarios[0],comentarios[1],comentarios[2]],[requisitos[0],requisitos[1],requisitos[2]]]
     B=[categorias[1],[subCategorias[3],subCategorias[4],subCategorias[5],subCategorias[6]],[[comentarios[3],comentarios[4],comentarios[5],comentarios[6]],comentarios[7],comentarios[8],comentarios[9]],[requisitos[3],requisitos[4],requisitos[5],requisitos[6]]]
     C=[categorias[2],[subCategorias[7],subCategorias[8]],[comentarios[10],comentarios[11]],[requisitos[7],requisitos[8]]]
-    D=[categorias[3],[subCategorias[9],subCategorias[10]],[comentarios[14],comentarios[15],comentarios[16]],requisitos[9]]
+    D=[categorias[3],[subCategorias[9],subCategorias[10],subCategorias[11]],[comentarios[14],comentarios[15],comentarios[16]],requisitos[9]]
     E=[categorias[4],[subCategorias[12],subCategorias[13]],[comentarios[17],comentarios[18]],[requisitos[10],requisitos[11]]]
     #Lista de subCategorias de licencias.
     listaSubCategoriaLicencias=[subCategorias[0],subCategorias[1],subCategorias[2],subCategorias[3],subCategorias[4],subCategorias[5],
     subCategorias[7],subCategorias[8],subCategorias[9],subCategorias[10],subCategorias[12],subCategorias[13]]
-
     graba("informacionLicencias",[A,B,C,D,E])#Graba toda la información de la página.
     graba("subTiposLicencias",listaSubCategoriaLicencias)#Graba solo las subCategorias.
-    return 
-crearListaInformacion()
+    return
