@@ -1,7 +1,9 @@
+#Tarea Programada 3
 #Elaborado por: Felipe Obando y Sebastián Bermúdez.
-#Fecha elaboración: 01/06/2021 10:20 PM
-#Última modificación: XX/06/2021  
+#Fecha de creación: 01/06/2021
+#Última modificación: 
 #Versión: 3.9.2
+
 #Función que graba el archivo.
 import pickle
 def graba(nombreArchivo,lista):
@@ -32,6 +34,7 @@ def lee (nomArchLeer):
         f=open(nomArchLeer,"rb")
         lista = pickle.load(f)
         f.close()
+        return lista
     except:
         print("Error al leer el archivo: ", nomArchLeer)
-    return lista
+    return False

@@ -1,3 +1,4 @@
+#Tarea Programada 3
 #Elaborado por: Felipe Obando y Sebastián Bermúdez.
 #Fecha de creación: 01/06/2021
 #Última modificación: 
@@ -5,8 +6,9 @@
 
 #INTERFAZ GRÁFICA
 #importaciones
-from tkinter import Tk,Label,Button,Entry, Frame
+from tkinter import *
 from typing import Collection
+from tkinter import messagebox
 
 class Menu(Frame):#hereda de la clase Frame.
 
@@ -14,10 +16,11 @@ class Menu(Frame):#hereda de la clase Frame.
         super().__init__(master,width=320, height=170)
         self.master = master
         self.pack()
-        self.create_widgets()
+        self.create_widgets() 
 
     def crearXML(self):#1
         print("Crear XML")
+        messagebox.showinfo("XML creado","Reporte XML creado con éxito.")
 
     def crearlicencia(self):#2
         print("Crear licencia")
@@ -57,4 +60,5 @@ class Menu(Frame):#hereda de la clase Frame.
 root = Tk()
 root.wm_title("Reporte de conductores")#titulo de la ventana
 app = Menu(root) 
+app.config(cursor='pirate')
 app.mainloop()

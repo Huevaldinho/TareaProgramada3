@@ -6,7 +6,7 @@
 #CLASE LICENCIA
 class Licencia:
     def __init__(self):
-        self.cedula=0
+        self.cedula=""
         self.nombreCompleto=""
         self.fechaNacimiento=""
         self.fechaExpedicion=""
@@ -63,8 +63,21 @@ class Licencia:
         return self.puntaje
     def obtenerCorreo(self):
         return self.correo
+    
+    def mostrarTodo(self):
+        print("\nCEDULA: "+self.cedula)
+        print("\nNOMBRE: "+self.nombreCompleto)
+        print("\nFECHA NACIMIENTO: "+self.fechaNacimiento)
+        print("\nFECHA EXPEDICION: "+self.fechaExpedicion)
+        print("\nFECHA VENCIMIENTO: "+self.fechaVencimiento)
+        print("\nTIPO LICENCIA: "+self.tipoLicencia)
+        print("\nTIPO SANGRE: "+self.tipoSangre)
+        print("\nDONADOR: "+str(self.donador))
+        print("\nSEDE: "+self.sede)
+        print("\nPUNTAJE: "+str(self.puntaje))
+        print("\nCORREO: "+self.correo)
 sebastian=Licencia()
 sebastian.asignarCedula(1)
-lista=[]
-lista.append(sebastian)
-print(sebastian.obtenerCedula())
+#lista=[]
+#lista.append(sebastian)
+#print(sebastian.obtenerCedula())
