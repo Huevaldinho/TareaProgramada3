@@ -131,5 +131,4 @@ def crearListaInformacion():
     #Lista de subCategorias de licencias.
     graba("informacionLicencias",[A,B,C,D,E])#Graba toda la información de la página.
     #[[Tipo,[Subtipos],[comentarios],[requisitos]],[Tipo,[Subtipos],[comentarios],[requisitos]]...]
-    print("??")
     return
