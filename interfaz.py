@@ -10,7 +10,7 @@ from tkinter import *
 from typing import Collection
 from tkinter import messagebox
 from importarInformacionHTML import *
-from xml import *
+from xmlCreador import *
 from funciones import *
 import sys
 class Menu(Frame):#hereda de la clase Frame.
@@ -22,7 +22,6 @@ class Menu(Frame):#hereda de la clase Frame.
         self.create_widgets() 
 
     def XML(self):#1
-        print("Crear XML")
         crearListaInformacion()#NUEVO
         crearXML()#NO ESTÄ SIRVIENDO LA LLAMADA, aunque si crea el archivo.
         messagebox.showinfo("XML creado","Reporte XML creado con éxito.")
@@ -102,10 +101,10 @@ class CreaLicencia(Frame):
 
     def enviarCantidadCreacion(self):
         #aquí sacamos el entry y mandamos a crear si es válido.
-        cantidad=self.entryCantidad.get()
-        if validarNumeroIngresado(cantidad):
+        cantidad=self.entryCantidad.get()#trae el entry.
+        if validarNumeroIngresado(cantidad):#archivo funciones.py
             generarLicencias(int(cantidad))
-            messagebox.showinfo("Se han creado licencias", "Licencias creadas de manera correcta")
+            messagebox.showinfo("Se han creado licencias", "Se han creado "+cantidad+" licencias.")
         else:
             messagebox.showerror("Intente de nuevo", "Ha habido un error, intente de nuevo")
     def create_widgets(self):#crea los botones y etiquetas.

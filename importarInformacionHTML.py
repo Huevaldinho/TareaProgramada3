@@ -52,14 +52,14 @@ def obtenerSubcategorias():
         contadorCategoria+=1
     subCategoriaLimpia=[]#lista para guardar las lista limpia, porque está arrastrando \n al final de casi todas.
     contadorCategoria=0
-    for k in subCategorias:
+    for k in subCategorias:#limpia los \n de los elementos
         if contadorCategoria==1 or contadorCategoria==2 or contadorCategoria==3 or contadorCategoria==4 or contadorCategoria==5 or contadorCategoria==6 or contadorCategoria==7 or contadorCategoria==8 or contadorCategoria==12 or contadorCategoria==13:
             subCategoriaLimpia.append(k[0:-1])
             contadorCategoria+=1
             continue
         subCategoriaLimpia.append(k)
         contadorCategoria+=1
-    return subCategoriaLimpia
+    return subCategoriaLimpia#LISTA DE SUBTIPOS.
 def obtenerComentarios():
     """
     Función: Obtener los comentarios de cada subcategoria de licencia.
@@ -129,9 +129,7 @@ def crearListaInformacion():
     D=[categorias[3],[subCategorias[9],subCategorias[10],subCategorias[11]],[comentarios[14],comentarios[15],comentarios[16]],requisitos[9]]
     E=[categorias[4],[subCategorias[12],subCategorias[13]],[comentarios[17],comentarios[18]],[requisitos[10],requisitos[11]]]
     #Lista de subCategorias de licencias.
-    listaSubCategoriaLicencias=[subCategorias[0],subCategorias[1],subCategorias[2],subCategorias[3],subCategorias[4],subCategorias[5],
-    subCategorias[7],subCategorias[8],subCategorias[9],subCategorias[10],subCategorias[12],subCategorias[13]]
     graba("informacionLicencias",[A,B,C,D,E])#Graba toda la información de la página.
-    graba("subTiposLicencias",listaSubCategoriaLicencias)#Graba solo las subCategorias.
-
+    #[[Tipo,[Subtipos],[comentarios],[requisitos]],[Tipo,[Subtipos],[comentarios],[requisitos]]...]
+    print("??")
     return
