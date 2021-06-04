@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 from archivos import *
+#from xml import *
 #FUNCIONES HTML
 def obtenerCategorias():
     """
@@ -132,4 +133,5 @@ def crearListaInformacion():
     subCategorias[7],subCategorias[8],subCategorias[9],subCategorias[10],subCategorias[12],subCategorias[13]]
     graba("informacionLicencias",[A,B,C,D,E])#Graba toda la información de la página.
     graba("subTiposLicencias",listaSubCategoriaLicencias)#Graba solo las subCategorias.
+
     return

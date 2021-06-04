@@ -76,8 +76,3 @@ class Licencia:
         print("\nSEDE: "+self.sede)
         print("\nPUNTAJE: "+str(self.puntaje))
         print("\nCORREO: "+self.correo)
-sebastian=Licencia()
-sebastian.asignarCedula(1)
-#lista=[]
-#lista.append(sebastian)
-#print(sebastian.obtenerCedula())

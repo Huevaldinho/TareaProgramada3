@@ -4,6 +4,7 @@
 #Última modificación: 
 #Versión: 3.9.2
 
+from xml.etree.ElementTree import TreeBuilder
 import names
 import random
 from clases import *
@@ -85,11 +86,20 @@ def generarLicencias(contador):
     graba("licencias",totalLicencias)
 
     return generarLicencias(contador-1)
+def validarNumeroIngresado(numero=None):#En la interfaz vamos a llamar a esta función que valide el número
+    #ingresado en el entry.
+    try:
+        numero=int(numero)
+        if numero>=1 and numero<=250:
+            return True
+        else:
+            return False
+    except:
+        return False
 
-#generarLicencias(3)
-
-"""
 if lee("licencias")==False:
     lista=[]
     graba("licencias",lista)
-"""
+else:
+    print(lee("licencias"))
+
