@@ -105,6 +105,7 @@ def formatoCedula(cedula=None):#recibe str solo para que no de error la expresio
         return True
     return False
 def validarLicencia(cedula=None):
+    print("Entra a la funcion")
     today = date.today()#fecha actual
     annoActual=today.year#saca el año para revisar que sea mayor de edad.
     if formatoCedula(str(cedula))==False:
@@ -113,11 +114,9 @@ def validarLicencia(cedula=None):
         licencias=lee("licencias")#carga la base de datos
         for revisar in licencias:#recorre toda la lista de objetos buscando la cédula
             if cedula == revisar.obtenerCedula():#si está en la lista.
-                if revisar.obtenerPuntaje()<=6:
-                    print("PUNTAJE MENOR O IGUAL A 6")
+                if revisar.obtenerPuntaje()<=6 and revisar.obtenerPuntaje()!=0:
                     return 1#1 significa error 1. no puede renovar porque debe volver a hacer el examen
                 elif revisar.obtenerPuntaje()>6:
-                    print("Puntaje mayor a 6")
                     print("Fecha vencimiento.",revisar.obtenerFechaVencimiento())
                     fechaNacimiento=int(revisar.obtenerFechaNacimiento()[-4:])#saca solo el año de nacimiento
                     if annoActual-fechaNacimiento<=25:#sumar 3 años al a fecha de vencimiento
@@ -137,7 +136,6 @@ def validarLicencia(cedula=None):
                         print("Fecha actualziada:",revisar.obtenerFechaVencimiento())
                         return True
                 elif  revisar.obtenerPuntaje()==0:
-                    print("?????")
                     return 2#tiene la licencia retirada permanentemente.
             else:#continua si el objeto de la lista tiene número de cédula diferente.
                 continue
@@ -151,10 +149,10 @@ if lee("licencias")==False:
 else:
     #print(lee("licencias"))#lista objetos(licencicias)
     pass
-"""
+
 x=lee("licencias")
 for i in x:
     print("CEDULA",i.obtenerCedula())
     print("PUNTAJE",i.obtenerPuntaje())
     print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
-"""
+
