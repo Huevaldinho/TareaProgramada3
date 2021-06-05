@@ -35,7 +35,10 @@ class Menu(Frame):#hereda de la clase Frame.
 
     
     def renovar(self):#3
-        print("Renovar")
+        root = Tk()
+        root.wm_title("Renovar licencias")
+        crearVentanaRenovar=RenovarLicencia(root)
+        crearVentanaRenovar.mainloop()
 
     def generarPDF(self):#4
         print("Generar PDF")
@@ -118,6 +121,42 @@ class CreaLicencia(Frame):
         self.lblCantidad.grid(row=1,column=1,padx=10,pady=10)
         self.entryCantidad.grid(row=2,column=1,padx=10,pady=10)
         self.btnCantidad.grid(row=3,column=1,padx=10,pady=10)
+        self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
+
+class RenovarLicencia(Frame):
+    def __init__(self, master=None):
+        super().__init__(master,width=320, height=170)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+
+    def renovacion(self):#PROBLEMA CON EL RETURN. aquí no agarra el correspondiente if
+        cedula=self.entryLicencia.get()#trae el entry.
+        if validarLicencia(cedula)==True:#ESTA MIERDA NO ESTÄ DETECTANDO SI ES 1 o 2 o True o False
+            messagebox.showinfo("Licencia renovada","Se ha renovado la licencia correctamente.")
+        elif validarLicencia(cedula)==1:
+            messagebox.showerror("Ha habido un error","Debido a su puntaje, debe realizar el examen otra vez.")
+        elif validarLicencia(cedula)==2:
+            messagebox.showerror("Ha habido un error","Licencia retirada permanentemente.")
+        elif validarLicencia(cedula)==False:
+            messagebox.showerror("Ha habido un error","La cédula ingresada no se encuentra registrada.")
+        self.clear_text()
+        return
+    def clear_text(self):
+        self.entryLicencia.delete(0, 'end')#borra el contenido del entry.
+    def create_widgets(self):#crea los botones y etiquetas.
+        self.lblRenovar=Label(self,text="Renovar licencias")
+        self.lblIngresar=Label(self,text="Ingresar cédula")
+        self.entryLicencia=Entry(self)
+        self.btnRenovar=Button(self,text="Renovar",width=50,height=3,command=self.renovacion)
+        self.btnLimpiar=Button(self,text="Limpiar",width=50,height=3,command=self.clear_text)
+        self.btnSalir=Button(self,text="Regresar",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        
+        self.lblRenovar.grid(row=0,column=1,padx=10,pady=10)
+        self.lblIngresar.grid(row=1,column=1,padx=10,pady=10)
+        self.entryLicencia.grid(row=2,column=1,padx=10,pady=10)
+        self.btnLimpiar.grid(row=3,column=1,padx=10,pady=10)
+        self.btnRenovar.grid(row=4,column=1,padx=10,pady=10)
 
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 root = Tk()

@@ -7,6 +7,9 @@
 from xml.etree.ElementTree import TreeBuilder
 import names
 import random
+import re
+import datetime
+from datetime import date
 from clases import *
 from datetime import *
 from archivos import *
@@ -96,10 +99,61 @@ def validarNumeroIngresado(numero=None):#En la interfaz vamos a llamar a esta fu
             return False
     except:
         return False
-
+def formatoCedula(cedula=None):#recibe str solo para que no de error la expresion regular
+    if re.match("^[1-9]{1}[0-9]{8}$",cedula):
+        return True
+    return False
+def validarLicencia(cedula=None):
+    today = date.today()#fecha actual
+    annoActual=today.year#saca el año para revisar que sea mayor de edad.
+    if formatoCedula(str(cedula))==False:
+        return False
+    try:#si tiene el formato correcto
+        licencias=lee("licencias")#carga la base de datos
+        for revisar in licencias:#recorre toda la lista de objetos buscando la cédula
+            if cedula == revisar.obtenerCedula():#si está en la lista.
+                if revisar.obtenerPuntaje()<=6:
+                    print("PUNTAJE MENOR O IGUAL A 6")
+                    return 1#1 significa error 1. no puede renovar porque debe volver a hacer el examen
+                elif revisar.obtenerPuntaje()>6:
+                    print("Puntaje mayor a 6")
+                    print("Fecha vencimiento.",revisar.obtenerFechaVencimiento())
+                    fechaNacimiento=int(revisar.obtenerFechaNacimiento()[-4:])#saca solo el año de nacimiento
+                    if annoActual-fechaNacimiento<=25:#sumar 3 años al a fecha de vencimiento
+                        now = datetime.now()#saco fecha
+                        fechaSinAno = str(now.strftime('%d-%m-%Y'))[0:6]#saco fecha sin año
+                        annoSumado=(str(now.strftime('%d-%m-%Y'))[6:])#saco año
+                        annoSumado=int(annoSumado)+3#sumo 3 años al año actual
+                        revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))#pego ambas cosas
+                        print("Fecha actualziada:",revisar.obtenerFechaVencimiento())
+                        return True
+                    else:#es mayor a 25
+                        now = datetime.now()
+                        fechaSinAno = str(now.strftime('%d-%m-%Y'))[0:6]
+                        annoSumado=(str(now.strftime('%d-%m-%Y'))[6:])
+                        annoSumado=int(annoSumado)+5
+                        revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))
+                        print("Fecha actualziada:",revisar.obtenerFechaVencimiento())
+                        return True
+                elif  revisar.obtenerPuntaje()==0:
+                    print("?????")
+                    return 2#tiene la licencia retirada permanentemente.
+            else:#continua si el objeto de la lista tiene número de cédula diferente.
+                continue
+    except:#si llega aqui porque tiene otro formato
+        print("Error")
+        return False
+    return False#nunca encontró la cédula
 if lee("licencias")==False:
     lista=[]
     graba("licencias",lista)
 else:
-    print(lee("licencias"))
-
+    #print(lee("licencias"))#lista objetos(licencicias)
+    pass
+"""
+x=lee("licencias")
+for i in x:
+    print("CEDULA",i.obtenerCedula())
+    print("PUNTAJE",i.obtenerPuntaje())
+    print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
+"""
