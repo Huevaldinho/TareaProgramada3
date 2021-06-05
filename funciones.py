@@ -109,13 +109,13 @@ def validarLicencia(cedula=None):
     today = date.today()#fecha actual
     annoActual=today.year#saca el año para revisar que sea mayor de edad.
     if formatoCedula(str(cedula))==False:
-        return False
+        return 4#formato incorrecto
     try:#si tiene el formato correcto
         licencias=lee("licencias")#carga la base de datos
         for revisar in licencias:#recorre toda la lista de objetos buscando la cédula
             if cedula == revisar.obtenerCedula():#si está en la lista.
                 if revisar.obtenerPuntaje()<=6 and revisar.obtenerPuntaje()!=0:
-                    return 1#1 significa error 1. no puede renovar porque debe volver a hacer el examen
+                    return 1#puntaje entre 1 y 6. debe hacer el examen otra vez
                 elif revisar.obtenerPuntaje()>6:
                     print("Fecha vencimiento.",revisar.obtenerFechaVencimiento())
                     fechaNacimiento=int(revisar.obtenerFechaNacimiento()[-4:])#saca solo el año de nacimiento
@@ -124,25 +124,24 @@ def validarLicencia(cedula=None):
                         fechaSinAno = str(now.strftime('%d-%m-%Y'))[0:6]#saco fecha sin año
                         annoSumado=(str(now.strftime('%d-%m-%Y'))[6:])#saco año
                         annoSumado=int(annoSumado)+3#sumo 3 años al año actual
-                        revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))#pego ambas cosas
+                        revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))#actualiza puntaje
                         print("Fecha actualziada:",revisar.obtenerFechaVencimiento())
-                        return True
+                        return 3#renovación correcta
                     else:#es mayor a 25
                         now = datetime.now()
                         fechaSinAno = str(now.strftime('%d-%m-%Y'))[0:6]
                         annoSumado=(str(now.strftime('%d-%m-%Y'))[6:])
                         annoSumado=int(annoSumado)+5
-                        revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))
+                        revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))#actualiza puntaje
                         print("Fecha actualziada:",revisar.obtenerFechaVencimiento())
-                        return True
+                        return 3#renovación correcta
                 elif  revisar.obtenerPuntaje()==0:
                     return 2#tiene la licencia retirada permanentemente.
             else:#continua si el objeto de la lista tiene número de cédula diferente.
                 continue
     except:#si llega aqui porque tiene otro formato
-        print("Error")
-        return False
-    return False#nunca encontró la cédula
+        return 4#
+    return 5#cedula no registrada
 if lee("licencias")==False:
     lista=[]
     graba("licencias",lista)

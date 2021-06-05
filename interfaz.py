@@ -131,22 +131,23 @@ class RenovarLicencia(Frame):
         self.pack()
         self.create_widgets()
 
-    def renovacion(self):#PROBLEMA CON EL RETURN. aquí no agarra el correspondiente if
+    def renovacion(self):
         cedula=self.entryLicencia.get()#trae el entry.
         retorna=validarLicencia(cedula)
-        print("CEDULA",cedula,"RETORNA:",retorna,type(retorna))
-        if retorna==1:
+        if retorna==1:#puntaje entre 1-6
             messagebox.showerror("Ha habido un error","Debido a su puntaje, debe realizar el examen otra vez.")
-        elif retorna==True:#por que si retorna es 1 entra aquí?
-            messagebox.showinfo("Licencia renovada","Se ha renovado la licencia correctamente.")
-        elif retorna==False:
-            messagebox.showerror("Ha habido un error","La cédula ingresada no se encuentra registrada.")
-        elif retorna==2:#sirve bien.
+        elif retorna==2:#puntaje 0
             messagebox.showerror("Ha habido un error","Licencia retirada permanentemente.")
-        self.clear_text()
+        elif retorna==3:#puntaje mayor a 6
+            messagebox.showinfo("Licencia renovada","Se ha renovado la licencia correctamente.")
+        elif retorna==4:#formato incorrecto
+            messagebox.showerror("Ha habido un error","La cédula ingresada no tiene el formato correcto")
+        elif retorna==5:#cédula no registrada
+            messagebox.showerror("Ha habido un error","La cédula ingresada no se cuentra registrada")
+        self.clear_text()#limpia el entry
         return
 
-    def clear_text(self):
+    def clear_text(self):#limpa entry de cédula
         self.entryLicencia.delete(0, 'end')#borra el contenido del entry.
 
     def create_widgets(self):#crea los botones y etiquetas.
