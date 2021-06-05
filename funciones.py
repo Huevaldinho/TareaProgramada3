@@ -13,6 +13,7 @@ from datetime import date
 from clases import *
 from datetime import *
 from archivos import *
+from importarInformacionHTML import *
 
 def generarLicencias(contador):
     ##### CONTADOR DICE LA CANTIDAD DE PERSONAS A GENERAR #####
@@ -58,7 +59,7 @@ def generarLicencias(contador):
     else:
         nombreLicencia.asignarFechaVencimiento(f"{date.today().day}-{date.today().month}-{date.today().year+5}")
 
-    #nombreLicencia.asignarTipoLicencia(ptipoLicencia) #FALTA
+    nombreLicencia.asignarTipoLicencia(random.choice(obtenerSubcategorias())) 
 
     nombreLicencia.asignarTipoSangre(random.choice(["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"])) #tipo de Sangre
 
@@ -83,7 +84,7 @@ def generarLicencias(contador):
 
     nombreLicencia.asignarCorreo(apellido1.lower()+apellido2[0].lower()+nombre[0].lower()+"@gmail.com") #correo con formato pedido
 
-    #nombreLicencia.mostrarTodo() #lo añadí a la clase y es para poder ver qué sucede
+    nombreLicencia.mostrarTodo() #lo añadí a la clase y es para poder ver qué sucede
 
     totalLicencias.append(nombreLicencia) #pega el objeto a la BD
     graba("licencias",totalLicencias)
