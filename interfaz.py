@@ -23,7 +23,7 @@ class Menu(Frame):#hereda de la clase Frame.
 
     def XML(self):#1
         crearListaInformacion()#NUEVO
-        crearXML()#NO ESTÄ SIRVIENDO LA LLAMADA, aunque si crea el archivo.
+        crearXML()
         messagebox.showinfo("XML creado","Reporte XML creado con éxito.")
 
     def crearlicencia(self):#2
@@ -39,7 +39,10 @@ class Menu(Frame):#hereda de la clase Frame.
         crearVentanaRenovar.mainloop()
 
     def generarPDF(self):#4
-        pass
+        root = Tk()
+        root.wm_title("Generar Reporte PDF")
+        crearVentanaPDF=CreaPDF(root)
+        crearVentanaPDF.mainloop()
 
     def reportesExcel(self):#5
         root = Tk()#crea la ventana nueva para el submenu de reportes.
@@ -48,7 +51,8 @@ class Menu(Frame):#hereda de la clase Frame.
         app.mainloop()
     
     def acerca(self):#6
-        pass
+        messagebox.showinfo("Autores","Pura machine en este código")
+    
     def salir(self):
         messagebox.showinfo("Información", "No olvides gestionar pronto tu licencia.")#muestra una ventana
         sys.exit()#Cierra la ventana
@@ -165,6 +169,34 @@ class RenovarLicencia(Frame):
         self.btnLimpiar.grid(row=4,column=1,padx=10,pady=10)
 
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
+
+class CreaPDF(Frame):
+    def __init__(self, master=None):
+        super().__init__(master,width=320, height=170)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+
+    def enviarPDF(self):
+        if licenciaPDF(self.entryCedulaPDF.get()):
+            messagebox.showinfo("Reporte Generado","PDF creado con éxito")
+            self.entryCedulaPDF.set("")
+        else:
+            messagebox.showerror("Error","Ingresó una cédula inexistente, intente de nuevo")
+
+    def create_widgets(self):#crea los botones y etiquetas.
+        self.lblLicencia=Label(self,text="Reporte PDF de licencias")
+        self.lblCantidad=Label(self,text="Ingrese la cédula de la persona a la que desea generar el PDF")
+        self.entryCedulaPDF=Entry(self,bd=5)
+        self.btnCantidad=Button(self,text="Generar Reporte",width=50,height=3,command=self.enviarPDF)
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        
+        self.lblLicencia.grid(row=0,column=1,padx=10,pady=10)
+        self.lblCantidad.grid(row=1,column=1,padx=10,pady=10)
+        self.entryCedulaPDF.grid(row=2,column=1,padx=10,pady=10)
+        self.btnCantidad.grid(row=3,column=1,padx=10,pady=10)
+        self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
+
 root = Tk()
 root.wm_title("Reporte de conductores")#titulo de la ventana
 app = Menu(root) 

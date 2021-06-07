@@ -32,10 +32,10 @@ def generarLicencias(contador):
         7:["Limón, \n\tBarrio Sandoval de Moín","Atlántico, \n\tGuápiles"]
         }
 
-    cedula = ''.join(str(random.randint(0,9)) for i in range(9)) #crea la cedula
+    cedula = ''.join(str(random.randint(1,9)) for i in range(9)) #crea la cedula
     nombreLicencia="Lic"+cedula #Le da el nombre al objeto
     nombreLicencia=Licencia() #crea el objeto
-    nombreLicencia.asignarCedula(cedula) #asigna la cedula
+    nombreLicencia.asignarCedula(int(cedula)) #asigna la cedula
 
     nombre=names.get_first_name()
     apellido1=names.get_last_name()
@@ -84,7 +84,7 @@ def generarLicencias(contador):
 
     nombreLicencia.asignarCorreo(apellido1.lower()+apellido2[0].lower()+nombre[0].lower()+"@gmail.com") #correo con formato pedido
 
-    nombreLicencia.mostrarTodo() #lo añadí a la clase y es para poder ver qué sucede
+    #nombreLicencia.mostrarTodo() #lo añadí a la clase y es para poder ver qué sucede
 
     totalLicencias.append(nombreLicencia) #pega el objeto a la BD
     graba("licencias",totalLicencias)
@@ -142,16 +142,40 @@ def validarLicencia(cedula=None):
     except:#si llega aqui porque tiene otro formato
         return 4#
     return 5#cedula no registrada
+
+def licenciaPDF(cedula):
+    try:
+        print("Entra try")
+        for licencias in lee("licencias"):
+
+            if int(cedula)==licencias.obtenerCedula():
+                reporte=PDF('L', 'mm', (60, 135))
+                reporte.crearPDF(licencias.obtenerCedula(),
+                licencias.obtenerFechaExpedicion(),
+                licencias.obtenerFechaNacimiento(),
+                licencias.obtenerFechaVencimiento(),
+                licencias.obtenerTipoLicencia(),
+                licencias.obtenerDonador(),
+                licencias.obtenerTipoSangre(),
+                licencias.obtenerNombreCompleto(),
+                licencias.obtenerSede())
+                reporte.output("LicenciaDe"+str(licencias.obtenerCedula())+".pdf","F")
+                return True
+        return False
+    except:
+        return False
+
 if lee("licencias")==False:
     lista=[]
     graba("licencias",lista)
 else:
     #print(lee("licencias"))#lista objetos(licencicias)
     pass
-
+"""
 x=lee("licencias")
 for i in x:
     print("CEDULA",i.obtenerCedula())
-    print("PUNTAJE",i.obtenerPuntaje())
-    print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
+    #print("PUNTAJE",i.obtenerPuntaje())
+    #print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
+"""
 
