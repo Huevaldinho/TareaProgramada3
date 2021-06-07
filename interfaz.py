@@ -10,6 +10,7 @@ from tkinter import *
 from typing import Collection
 from tkinter import messagebox
 from importarInformacionHTML import *
+from crearReportesExcel import *
 from xmlCreador import *
 from funciones import *
 import sys
@@ -75,7 +76,7 @@ class Menu(Frame):#hereda de la clase Frame.
         self.btnAcerca.grid(row=5,column=1,padx=10,pady=10)
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 
-class SubMenu(Frame):#TODO NUEVo
+class SubMenu(Frame):#Reportes excel
     def __init__(self, master=None):
         super().__init__(master,width=320, height=170)
         self.master = master

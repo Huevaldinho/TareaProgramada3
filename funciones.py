@@ -169,12 +169,10 @@ if lee("licencias")==False:
 else:
     #print(lee("licencias"))#lista objetos(licencicias)
     pass
-#"""
+"""
 x=lee("licencias")
 for i in x:
     print("CEDULA",i.obtenerCedula())
     #print("PUNTAJE",i.obtenerPuntaje())
     #print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
-#"""
-
-
+"""
