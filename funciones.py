@@ -15,27 +15,29 @@ from datetime import *
 from archivos import *
 from importarInformacionHTML import *
 
+def formatoCedula(cedula=None):#recibe str solo para que no de error la expresion regular
+    if re.match("^[1-9]{1}[0-9]{8}$",cedula):
+        return True
+    return False
 def generarLicencias(contador):
     ##### CONTADOR DICE LA CANTIDAD DE PERSONAS A GENERAR #####
-
     if contador == 0: #acaba la recursividad
         return
-    
     totalLicencias=lee("licencias")
     lugaresSede={
-        1:["Sede Central, \n\tSan Sebastián", "Zona Sur, \n\tPerez Zeledón"],
-        2:["Zona Norte, \n\tSan Carlos","GAM, \n\tTránsito San Ramón","GAM, \n\tMontecillos de Alajuela"],
-        3:["GAM, \n\tTránsito Cartago"],
-        4:["GAM, \n\tBarva de Heredia"],
-        5:["Pacífico, \n\tLiberia","Pacífico, \n\tNicoya"],
-        6:["Puntarenas, \n\tChacarita","Zona Sur, \n\tRío Claro de Golfito"],
-        7:["Limón, \n\tBarrio Sandoval de Moín","Atlántico, \n\tGuápiles"]
+        1:["Sede Central, San Sebastián", "Zona Sur, Perez Zeledón"],
+        2:["Zona Norte, San Carlos","GAM, Tránsito San Ramón","GAM, Montecillos de Alajuela"],
+        3:["GAM, Tránsito Cartago"],
+        4:["GAM, Barva de Heredia"],
+        5:["Pacífico, Liberia","Pacífico, Nicoya"],
+        6:["Puntarenas, Chacarita","Zona Sur, Río Claro de Golfito"],
+        7:["Limón, Barrio Sandoval de Moín","Atlántico, Guápiles"]
         }
 
     cedula = ''.join(str(random.randint(1,9)) for i in range(9)) #crea la cedula
     nombreLicencia="Lic"+cedula #Le da el nombre al objeto
     nombreLicencia=Licencia() #crea el objeto
-    nombreLicencia.asignarCedula(int(cedula)) #asigna la cedula
+    if formatoCedula(cedula): nombreLicencia.asignarCedula(int(cedula))
 
     nombre=names.get_first_name()
     apellido1=names.get_last_name()
@@ -59,7 +61,7 @@ def generarLicencias(contador):
     else:
         nombreLicencia.asignarFechaVencimiento(f"{date.today().day}-{date.today().month}-{date.today().year+5}")
 
-    nombreLicencia.asignarTipoLicencia(random.choice(obtenerSubcategorias())) 
+    nombreLicencia.asignarTipoLicencia(random.choice(obtenerSubcategorias())) #tipo de licencia
 
     nombreLicencia.asignarTipoSangre(random.choice(["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"])) #tipo de Sangre
 
@@ -90,6 +92,7 @@ def generarLicencias(contador):
     graba("licencias",totalLicencias)
 
     return generarLicencias(contador-1)
+
 def validarNumeroIngresado(numero=None):#En la interfaz vamos a llamar a esta función que valide el número
     #ingresado en el entry.
     try:
@@ -100,10 +103,7 @@ def validarNumeroIngresado(numero=None):#En la interfaz vamos a llamar a esta fu
             return False
     except:
         return False
-def formatoCedula(cedula=None):#recibe str solo para que no de error la expresion regular
-    if re.match("^[1-9]{1}[0-9]{8}$",cedula):
-        return True
-    return False
+
 def validarLicencia(cedula=None):
     print("Entra a la funcion")
     today = date.today()#fecha actual
@@ -145,9 +145,7 @@ def validarLicencia(cedula=None):
 
 def licenciaPDF(cedula):
     try:
-        print("Entra try")
         for licencias in lee("licencias"):
-
             if int(cedula)==licencias.obtenerCedula():
                 reporte=PDF('L', 'mm', (60, 135))
                 reporte.crearPDF(licencias.obtenerCedula(),
@@ -171,11 +169,12 @@ if lee("licencias")==False:
 else:
     #print(lee("licencias"))#lista objetos(licencicias)
     pass
-"""
+#"""
 x=lee("licencias")
 for i in x:
     print("CEDULA",i.obtenerCedula())
     #print("PUNTAJE",i.obtenerPuntaje())
     #print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
-"""
+#"""
+
 

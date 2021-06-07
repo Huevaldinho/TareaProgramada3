@@ -170,8 +170,3 @@ class PDF(FPDF):
         self.tipoSangre(sangre)
         self.nombre(nombre)
         self.bottom(sede)
-
-
-#license=PDF('L', 'mm', (60, 135))
-#license.crearPDF(cedula,expedicion,nacimiento,vencimiento,tipoLicencia,donador,sangre,nombre,sede)
-#license.output("pruebasReporte.pdf","F")
