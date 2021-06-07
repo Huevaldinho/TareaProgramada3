@@ -82,9 +82,12 @@ class SubMenu(Frame):#Reportes excel
         self.master = master
         self.pack()
         self.create_widgets()
+    def enviarReporteTotal(self):
+        reporteTotalidadLicencias()
+        messagebox.showinfo("Reporte creado", "Se ha generado de totalidad de licencias.")
 
     def create_widgets(self):#crea los botones y etiquetas.
-        self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="grey")
+        self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="grey",command=self.enviarReporteTotal)
         self.btnCrearLicencia=Button(self,text="Por tipo de licencia",width=100,height=3,bg="grey")
         self.btnRenovarLicencia=Button(self,text="Examen por sanción",width=100,height=3,bg="grey")
         self.btnGenerarPDF=Button(self,text="Los donantes de órganos",width=100,height=3,bg="grey")

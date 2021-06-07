@@ -33,4 +33,3 @@ def reporteTotalidadLicencias():#Función para crear el reporte de todas las lic
         hoja.append(producto)
     wb.save('totalidadLiencias.xlsx')#guarda el archivo con el nombre.
     return
-reporteTotalidadLicencias()
