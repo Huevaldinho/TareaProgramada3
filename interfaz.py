@@ -180,7 +180,7 @@ class CreaPDF(Frame):
     def enviarPDF(self):
         if licenciaPDF(self.entryCedulaPDF.get()):
             messagebox.showinfo("Reporte Generado","PDF creado con éxito")
-            self.entryCedulaPDF.set("")
+            self.entryCedulaPDF.delete(0, 'end')
         else:
             messagebox.showerror("Error","Ingresó una cédula inexistente, intente de nuevo")
 
