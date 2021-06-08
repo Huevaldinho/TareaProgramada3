@@ -113,7 +113,7 @@ def validarLicencia(cedula=None):
     try:#si tiene el formato correcto
         licencias=lee("licencias")#carga la base de datos
         for revisar in licencias:#recorre toda la lista de objetos buscando la cédula
-            if cedula == revisar.obtenerCedula():#si está en la lista.
+            if int(cedula) == revisar.obtenerCedula():#si está en la lista.
                 if revisar.obtenerPuntaje()<=6 and revisar.obtenerPuntaje()!=0:
                     return 1#puntaje entre 1 y 6. debe hacer el examen otra vez
                 elif revisar.obtenerPuntaje()>6:
