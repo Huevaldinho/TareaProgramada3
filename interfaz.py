@@ -9,6 +9,7 @@
 from tkinter import *
 from typing import Collection
 from tkinter import messagebox
+from tkinter import ttk
 from importarInformacionHTML import *
 from crearReportesExcel import *
 from xmlCreador import *
@@ -48,7 +49,7 @@ class Menu(Frame):#hereda de la clase Frame.
     def reportesExcel(self):#5
         root = Tk()#crea la ventana nueva para el submenu de reportes.
         root.wm_title("Reporte de conductores")#titulo de la ventana
-        app = SubMenu(root) 
+        app = SubMenuExcel(root) 
         app.mainloop()
     
     def acerca(self):#6
@@ -76,19 +77,27 @@ class Menu(Frame):#hereda de la clase Frame.
         self.btnAcerca.grid(row=5,column=1,padx=10,pady=10)
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 
-class SubMenu(Frame):#Reportes excel
+class SubMenuExcel(Frame):#Reportes excel
     def __init__(self, master=None):
         super().__init__(master,width=320, height=170)
         self.master = master
         self.pack()
         self.create_widgets()
-    def enviarReporteTotal(self):
-        reporteTotalidadLicencias()
-        messagebox.showinfo("Reporte creado", "Se ha generado de totalidad de licencias.")
 
+    def enviarTotalReporte(self):
+        if reporteTotalidadLicencias():
+            messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
+        else:
+            messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+    def enviarTipoLicenciaReporte(self):
+        root = Tk()#crea la ventana nueva para el submenu de reportes.
+        root.wm_title("Reporte por tipo de licencia")#titulo de la ventana
+        app = SubMenuTipoLicencia(root) 
+        app.mainloop()
+        pass
     def create_widgets(self):#crea los botones y etiquetas.
-        self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="grey",command=self.enviarReporteTotal)
-        self.btnCrearLicencia=Button(self,text="Por tipo de licencia",width=100,height=3,bg="grey")
+        self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="grey",command=self.enviarTotalReporte)
+        self.btnCrearLicencia=Button(self,text="Por tipo de licencia",width=100,height=3,bg="grey",command=self.enviarTipoLicenciaReporte)
         self.btnRenovarLicencia=Button(self,text="Examen por sanción",width=100,height=3,bg="grey")
         self.btnGenerarPDF=Button(self,text="Los donantes de órganos",width=100,height=3,bg="grey")
         self.btnReporteExcel=Button(self,text="Licencia anulada",width=100,height=3,bg="grey")
@@ -101,6 +110,42 @@ class SubMenu(Frame):#Reportes excel
         self.btnGenerarPDF.grid(row=3,column=1,padx=10,pady=10)
         self.btnReporteExcel.grid(row=4,column=1,padx=10,pady=10)
         self.btnAcerca.grid(row=5,column=1,padx=10,pady=10)
+        self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
+
+class SubMenuTipoLicencia(Frame):
+    def __init__(self, master=None):
+        super().__init__(master,width=320, height=170)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+    def crearReportePorTipoLicencia(self):
+        opciones=["Licencia A1","Licencia A2","Licencia A3","Licencia B1","Licencia B2 (camión pequeño)",
+        "Licencia B3 (camión pesado)","Licencia B4 (camión articulado)","Licencia C1 (taxi)","Licencia C2 (autobús)",
+        "Licencia D1","Licencia D2","Licencia D3","Licencia E1","Licencia E2"]
+        if not self.opciones.get() in opciones:
+            messagebox.showerror("Ha ocurrido un error","Debe seleccionar una opción de la caja de opciones.")
+            self.opciones.delete(0,"end")
+        else:
+            if reporteTipoLicencia(self.opciones.get()):
+                messagebox.showinfo("Reporte generado","Se ha generado el reporte.")
+                self.opciones.delete(0,"end")
+            else:
+                messagebox.showerror("Ha ocurrido un error","Ha ocurrido un error, debe cerrar el archivo.")
+        return
+    def create_widgets(self):#crea los botones y etiquetas.
+        self.lblTipo=Label(self,text="Tipo de licencia",width=50,height=3)
+        self.opciones=ttk.Combobox(self)
+        self.opciones["values"]=["Licencia A1","Licencia A2","Licencia A3","Licencia B1","Licencia B2 (camión pequeño)",
+        "Licencia B3 (camión pesado)","Licencia B4 (camión articulado)","Licencia C1 (taxi)","Licencia C2 (autobús)",
+        "Licencia D1","Licencia D2","Licencia D3","Licencia E1","Licencia E2"]
+
+        self.btnGenerar=Button(self,text="Generar reporte",width=50,height=3,bg="grey",command=self.crearReportePorTipoLicencia)
+
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        #Lugar ubicación
+        self.lblTipo.grid(row=0,column=1,padx=10,pady=10)
+        self.opciones.grid(row=1,column=1,padx=10,pady=10)
+        self.btnGenerar.grid(row=2,column=1,padx=10,pady=10)
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 
 class CreaLicencia(Frame):
