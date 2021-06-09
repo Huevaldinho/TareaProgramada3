@@ -112,21 +112,21 @@ class SubMenuExcel(Frame):#Reportes excel
         self.btnAcerca.grid(row=5,column=1,padx=10,pady=10)
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 
-class SubMenuTipoLicencia(Frame):
+class SubMenuTipoLicencia(Frame):#se cambiaron las opciones
     def __init__(self, master=None):
         super().__init__(master,width=320, height=170)
         self.master = master
         self.pack()
         self.create_widgets()
     def crearReportePorTipoLicencia(self):
-        opciones=["Licencia A1","Licencia A2","Licencia A3","Licencia B1","Licencia B2 (camión pequeño)",
-        "Licencia B3 (camión pesado)","Licencia B4 (camión articulado)","Licencia C1 (taxi)","Licencia C2 (autobús)",
-        "Licencia D1","Licencia D2","Licencia D3","Licencia E1","Licencia E2"]
+        opciones=["Licencias de conducir tipo A (motocicletas)","Licencias de conducir tipo B (automóviles y camiones)",
+        "Licencias de conducción tipo C (autobús y taxi)","Licencias de conducir tipo D (tractores y maquinaria)",
+        "Licencias tipo E (universales)"]
         if not self.opciones.get() in opciones:
             messagebox.showerror("Ha ocurrido un error","Debe seleccionar una opción de la caja de opciones.")
             self.opciones.delete(0,"end")
         else:
-            if reporteTipoLicencia(self.opciones.get()):
+            if reporteTipoLicencia(self.opciones.get()):#crarReporetesExcel.py
                 messagebox.showinfo("Reporte generado","Se ha generado el reporte.")
                 self.opciones.delete(0,"end")
             else:
@@ -135,9 +135,9 @@ class SubMenuTipoLicencia(Frame):
     def create_widgets(self):#crea los botones y etiquetas.
         self.lblTipo=Label(self,text="Tipo de licencia",width=50,height=3)
         self.opciones=ttk.Combobox(self)
-        self.opciones["values"]=["Licencia A1","Licencia A2","Licencia A3","Licencia B1","Licencia B2 (camión pequeño)",
-        "Licencia B3 (camión pesado)","Licencia B4 (camión articulado)","Licencia C1 (taxi)","Licencia C2 (autobús)",
-        "Licencia D1","Licencia D2","Licencia D3","Licencia E1","Licencia E2"]
+        self.opciones["values"]=["Licencias de conducir tipo A (motocicletas)","Licencias de conducir tipo B (automóviles y camiones)",
+        "Licencias de conducción tipo C (autobús y taxi)","Licencias de conducir tipo D (tractores y maquinaria)",
+        "Licencias tipo E (universales)"]
 
         self.btnGenerar=Button(self,text="Generar reporte",width=50,height=3,bg="grey",command=self.crearReportePorTipoLicencia)
 
@@ -187,6 +187,7 @@ class RenovarLicencia(Frame):
     def renovacion(self):
         cedula=self.entryLicencia.get()#trae el entry.
         retorna=validarLicencia(cedula)
+        print("Está retornando",retorna)
         if retorna==1:#puntaje entre 1-6
             messagebox.showerror("Ha habido un error","Debido a su puntaje, debe realizar el examen otra vez.")
         elif retorna==2:#puntaje 0

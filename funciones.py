@@ -105,7 +105,6 @@ def validarNumeroIngresado(numero=None):#En la interfaz vamos a llamar a esta fu
         return False
 
 def validarLicencia(cedula=None):
-    print("Entra a la funcion")
     today = date.today()#fecha actual
     annoActual=today.year#saca el año para revisar que sea mayor de edad.
     if formatoCedula(str(cedula))==False:
@@ -114,9 +113,11 @@ def validarLicencia(cedula=None):
         licencias=lee("licencias")#carga la base de datos
         for revisar in licencias:#recorre toda la lista de objetos buscando la cédula
             if int(cedula) == revisar.obtenerCedula():#si está en la lista.
+                print("Busca:",cedula,"En lista:",revisar.obtenerCedula())
                 if revisar.obtenerPuntaje()<=6 and revisar.obtenerPuntaje()!=0:
                     return 1#puntaje entre 1 y 6. debe hacer el examen otra vez
                 elif revisar.obtenerPuntaje()>6:
+                    print("Fecha expedición:",revisar.obtenerFechaExpedicion())
                     print("Fecha vencimiento.",revisar.obtenerFechaVencimiento())
                     fechaNacimiento=int(revisar.obtenerFechaNacimiento()[-4:])#saca solo el año de nacimiento
                     if annoActual-fechaNacimiento<=25:#sumar 3 años al a fecha de vencimiento
@@ -173,6 +174,6 @@ else:
 x=lee("licencias")
 for i in x:
     print("CEDULA",i.obtenerCedula())
-    #print("PUNTAJE",i.obtenerPuntaje())
-    #print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
+    print("PUNTAJE",i.obtenerPuntaje())
+    print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
 """

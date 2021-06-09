@@ -80,13 +80,17 @@ def reporteTotalidadLicencias():#Función para crear el reporte de todas las lic
 
 def reporteTipoLicencia(tipo):
     #b. Por tipo de licencia
-    totalLicencias=lee("licencias")#trae todas la licencias
+    totalLicencias={"Licencias de conducir tipo A (motocicletas)":["Licencia A1","Licencia A2","Licencia A3"],
+    "Licencias de conducir tipo B (automóviles y camiones)":["Licencia B1","Licencia B2 (camión pequeño)","Licencia B3 (camión pesado)","Licencia B4 (camión articulado)"],
+    "Licencias de conducción tipo C (autobús y taxi)":["Licencia C1 (taxi)","Licencia C2 (autobús)"],
+    "Licencias de conducir tipo D (tractores y maquinaria)":["Licencia D1","Licencia D2","Licencia D3"],
+    "Licencias tipo E (universales)":["Licencia E1","Licencia E2"]}
+    baseDatos=lee("licencias")
     listaLicencias=[]
 
-    for licencia in totalLicencias:#ciclo para sacar los objetos de la lista.
-        if licencia.obtenerTipoLicencia()==tipo:#si el objeto tiene el mismo tipo de licencia que el seleccionado
-            persona=(licencia.obtenerCedula(),licencia.obtenerNombreCompleto(),licencia.obtenerTipoLicencia())
-            listaLicencias.append(persona)
+    for licencia in baseDatos:
+        if licencia.obtenerTipoLicencia() in totalLicencias[tipo]:
+            listaLicencias.append((licencia.obtenerCedula(),licencia.obtenerNombreCompleto(),licencia.obtenerTipoLicencia()))
 
     fecha = datetime.now() #fecha y hora actual.
     fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%m/%d/%Y, %H:%M:%S"))#para usar en el excel.
@@ -97,7 +101,7 @@ def reporteTipoLicencia(tipo):
 
     TITULO = Font(
                 name='Calibri',
-                size=24,
+                size=18,
                 bold=True,
                 italic=False,
                 vertAlign=None,
@@ -114,10 +118,10 @@ def reporteTipoLicencia(tipo):
                 strike=False,
                 color='00000000')
 
-    hoja.merge_cells('A1:F1')#Utiliza de la A1 a la G1 para el título
+    hoja.merge_cells('A1:L1')#Utiliza de la A1 a la G1 para el título
     hoja.merge_cells("A2:F2")#Utiliza de la A1 a la G1 para la fecha
 
-    hoja["A1"] = "Reporte por tipo de licencia"#TITULO 
+    hoja["A1"] = "Reporte "+ tipo#TITULO 
     hoja["A1"].font=TITULO#formato del titulo, está arriba.
 
     hoja["A2"] = fechaFormato#Fecha y hora.
