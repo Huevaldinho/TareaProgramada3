@@ -24,7 +24,7 @@ def reporteTotalidadLicencias():#Función para crear el reporte de todas las lic
         listaLicencias.append(persona)#guarda la fila (tupla) en las lista.
 
     fecha = datetime.now() #fecha y hora actual.
-    fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%m/%d/%Y, %H:%M:%S"))#para usar en el excel.
+    fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
     
     wb = openpyxl.Workbook()#crea la instancia (archivo).
     hoja = wb.active#toma la instancia que crea wb y la utiliza como activa.
@@ -93,7 +93,7 @@ def reporteTipoLicencia(tipo):
             listaLicencias.append((licencia.obtenerCedula(),licencia.obtenerNombreCompleto(),licencia.obtenerTipoLicencia()))
 
     fecha = datetime.now() #fecha y hora actual.
-    fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%m/%d/%Y, %H:%M:%S"))#para usar en el excel.
+    fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
     
     wb = openpyxl.Workbook()#crea la instancia (archivo).
     hoja = wb.active#toma la instancia que crea wb y la utiliza como activa.
@@ -139,7 +139,70 @@ def reporteTipoLicencia(tipo):
     for i in listaLicencias:
         hoja.append(i)
     try:
-        wb.save("tipoLicencia"+tipo+".xlsx")#guarda el archivo con el nombre.
+        wb.save("reporte"+tipo+".xlsx")#guarda el archivo con el nombre.
+    except:
+        return False
+    return True
+
+
+
+def reporteExamenSancion():
+    #c.Examen por sanción
+    baseDatos=lee("licencias")
+    listaLicencias=[]
+
+    for licencia in baseDatos:
+        if licencia.obtenerPuntaje()<=6 and licencia.obtenerPuntaje()!=0:
+            listaLicencias.append((licencia.obtenerCedula(),licencia.obtenerNombreCompleto(),licencia.obtenerTipoLicencia(),licencia.obtenerPuntaje()))
+
+    fecha = datetime.now() #fecha y hora actual.
+    fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
+    
+    wb = openpyxl.Workbook()#crea la instancia (archivo).
+    hoja = wb.active#toma la instancia que crea wb y la utiliza como activa.
+    hoja.title="Tipo de licencia"#Asigna el nombre de la hoja.
+
+    TITULO = Font(
+                name='Calibri',
+                size=18,
+                bold=True,
+                italic=False,
+                vertAlign=None,
+                underline='none',
+                strike=False,
+                color='000000FF')
+    FECHA = Font(
+                name='Calibri',
+                size=14,
+                bold=True,
+                italic=False,
+                vertAlign=None,
+                underline='none',
+                strike=False,
+                color='00000000')
+
+    hoja.merge_cells('A1:F1')#Utiliza de la A1 a la G1 para el título
+    hoja.merge_cells("A2:F2")#Utiliza de la A1 a la G1 para la fecha
+
+    hoja["A1"] = "Reporte examen por sanción"#TITULO 
+    hoja["A1"].font=TITULO#formato del titulo, está arriba.
+
+    hoja["A2"] = fechaFormato#Fecha y hora.
+    hoja["A2"].font = FECHA#format de la fecha y hora.
+    
+    # Crea la fila del encabezado con los títulos
+    hoja.append(('Cédula', 'Nombre completo', "Tipo de licencia","Puntaje"))#columna
+
+    #Estas 4 lineas de código centran el texto de la A1 y A2.
+    celdas = hoja["A1"]
+    celdas.alignment = Alignment(horizontal="center", vertical="center")
+    celdas=hoja["A2"]
+    celdas.alignment = Alignment(horizontal="center", vertical="center")
+
+    for i in listaLicencias:
+        hoja.append(i)
+    try:
+        wb.save("reporteExamenPorSancion"+".xlsx")#guarda el archivo con el nombre.
     except:
         return False
     return True

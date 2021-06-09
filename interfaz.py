@@ -95,10 +95,15 @@ class SubMenuExcel(Frame):#Reportes excel
         app = SubMenuTipoLicencia(root) 
         app.mainloop()
         pass
+    def enviarExamenPorSancionReporte(self):
+        if reporteExamenSancion():
+            messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
+        else:
+            messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
     def create_widgets(self):#crea los botones y etiquetas.
         self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="grey",command=self.enviarTotalReporte)
         self.btnCrearLicencia=Button(self,text="Por tipo de licencia",width=100,height=3,bg="grey",command=self.enviarTipoLicenciaReporte)
-        self.btnRenovarLicencia=Button(self,text="Examen por sanción",width=100,height=3,bg="grey")
+        self.btnRenovarLicencia=Button(self,text="Examen por sanción",width=100,height=3,bg="grey",command=self.enviarExamenPorSancionReporte)
         self.btnGenerarPDF=Button(self,text="Los donantes de órganos",width=100,height=3,bg="grey")
         self.btnReporteExcel=Button(self,text="Licencia anulada",width=100,height=3,bg="grey")
         self.btnAcerca=Button(self,text="Licencias por sede",width=100,height=3,bg="grey")
