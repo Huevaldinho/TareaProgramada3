@@ -84,7 +84,7 @@ def obtenerComentarios():
             else:
                 comentarioTexto.append(n.text)
         contadorCategoria+=1
-    comentarioTexto.append("Permite manejar todo tipo de vehículo, excepto los de transporte público.")#NO LO ESTA AGARRANDO
+    comentarioTexto.append(comentarios[78].text)    
     return comentarioTexto
 def obtenerRequisitos():
     """
@@ -105,7 +105,7 @@ def obtenerRequisitos():
     for g in requisitos:
         if contadorCategoria in requisitosListo:
             if contadorCategoria==11:
-                requisitosTexto.append("Ser mayor de 18 años.\nCédula o documento de identificación original del aspirante.\nDictamen médico digital para licencia de conducir clase A3.\nHacer examen teórico y examen práctico para licencia de conducir A3.")
+                requisitosTexto.append(requisitos[10].text)
             if contadorCategoria in listaRequisitosLimpiar:
                 requisitosTexto.append(g.text[0:-1])
             else:
