@@ -76,6 +76,7 @@ class Licencia:
         print("\nSEDE: "+self.sede)
         print("\nPUNTAJE: "+str(self.puntaje))
         print("\nCORREO: "+self.correo)
+        return [self.cedula,self.nombreCompleto,self.fechaNacimiento,self.fechaExpedicion,self.fechaVencimiento,self.tipoLicencia,self.tipoSangre,self.donador,self.sede,self.puntaje,self.correo]
 from fpdf import FPDF
 from datetime import *
 
