@@ -11,6 +11,11 @@ from archivos import *
 from clases import *
 from datetime import datetime
 def reporteTotalidadLicencias():#Función para crear el reporte de todas las licencias
+    """
+    Función: Crear reporte de excel de totalidad de licencias.
+    Entrada: N/A.
+    Salida: N/A.
+    """
     #a. Totalidad de licencias
     totalLicencias=lee("licencias")#trae todas la licencias
     listaLicencias=[]#lista para rellenar las filas.(DATOS)
@@ -79,6 +84,12 @@ def reporteTotalidadLicencias():#Función para crear el reporte de todas las lic
     return True
 
 def reporteTipoLicencia(tipo):
+    """
+    Función: Crear reporte de excel por tipo de licencia.
+    Entrada: 
+    -tipo(str): Tipo de licencia.
+    Salida: N/A.
+    """
     #b. Por tipo de licencia
     totalLicencias={"Licencias de conducir tipo A (motocicletas)":["Licencia A1","Licencia A2","Licencia A3"],
     "Licencias de conducir tipo B (automóviles y camiones)":["Licencia B1","Licencia B2 (camión pequeño)","Licencia B3 (camión pesado)","Licencia B4 (camión articulado)"],
@@ -147,6 +158,11 @@ def reporteTipoLicencia(tipo):
 
 
 def reporteExamenSancion():
+    """
+    Función: Crear reporte de excel de las licencias con 0 como puntaje.
+    Entrada: N/A.
+    Salida: N/A.
+    """
     #c.Examen por sanción
     baseDatos=lee("licencias")
     listaLicencias=[]

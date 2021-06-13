@@ -1,7 +1,7 @@
 #Tarea Programada 3
 #Elaborado por: Felipe Obando y Sebastián Bermúdez.
 #Fecha de creación: 01/06/2021
-#Última modificación: 
+#Última modificación: 12/06/2021 10:25 pm
 #Versión: 3.9.2
 
 #INTERFAZ GRÁFICA
@@ -65,13 +65,13 @@ class Menu(Frame):#hereda de la clase Frame.
         sys.exit()#Cierra la ventana
 
     def create_widgets(self):#crea los botones y etiquetas.
-        self.btnCrearXML=Button(self,text="Crear XML",width=100,height=3,bg="grey",command=self.XML)
-        self.btnCrearLicencia=Button(self,text="Crear Licencia",width=100,height=3,bg="grey",command=self.crearlicencia)
-        self.btnRenovarLicencia=Button(self,text="Renovar licencia",width=100,height=3,bg="grey",command=self.renovar)
-        self.btnGenerarPDF=Button(self,text="Generar PDF",width=100,height=3,bg="grey",command=self.generarPDF)
-        self.btnReporteExcel=Button(self,text="Reporte Excel",width=100,height=3,bg="grey",command=self.reportesExcel)
-        self.btnAcerca=Button(self,text="Acerca",width=100,height=3,bg="grey",command=self.acerca)
-        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.salir)
+        self.btnCrearXML=Button(self,text="Crear XML",width=100,height=3,bg="#49A",command=self.XML)
+        self.btnCrearLicencia=Button(self,text="Crear Licencia",width=100,height=3,bg="#49A",command=self.crearlicencia)
+        self.btnRenovarLicencia=Button(self,text="Renovar licencia",width=100,height=3,bg="#49A",command=self.renovar)
+        self.btnGenerarPDF=Button(self,text="Generar PDF",width=100,height=3,bg="#49A",command=self.generarPDF)
+        self.btnReporteExcel=Button(self,text="Reporte Excel",width=100,height=3,bg="#49A",command=self.reportesExcel)
+        self.btnAcerca=Button(self,text="Acerca",width=100,height=3,bg="#49A",command=self.acerca)
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.salir)
 
         #Lugar ubicación
         self.btnCrearXML.grid(row=0,column=1,padx=10,pady=10)
@@ -103,7 +103,7 @@ class CreaLicencia(Frame):
         self.lblCantidad=Label(self,text="¿A cuántas personas desea crear licencia?")
         self.entryCantidad=Entry(self)
         self.btnCantidad=Button(self,text="Generar",width=50,height=3,command=self.enviarCantidadCreacion)
-        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         
         self.lblLicencia.grid(row=0,column=1,padx=10,pady=10)
         self.lblCantidad.grid(row=1,column=1,padx=10,pady=10)
@@ -144,7 +144,7 @@ class RenovarLicencia(Frame):
         self.entryLicencia=Entry(self)
         self.btnRenovar=Button(self,text="Renovar",width=25,height=3,command=self.renovacion)
         self.btnLimpiar=Button(self,text="Limpiar",width=25,height=3,command=self.clear_text)
-        self.btnSalir=Button(self,text="Regresar",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        self.btnSalir=Button(self,text="Regresar",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         
         self.lblRenovar.grid(row=0,column=1,padx=10,pady=10)
         self.lblIngresar.grid(row=1,column=1,padx=10,pady=10)
@@ -173,7 +173,7 @@ class CreaPDF(Frame):
         self.lblCantidad=Label(self,text="Ingrese la cédula de la persona a la que desea generar el PDF")
         self.entryCedulaPDF=Entry(self,bd=5)
         self.btnCantidad=Button(self,text="Generar Reporte",width=50,height=3,command=self.enviarPDF)
-        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         
         self.lblLicencia.grid(row=0,column=1,padx=10,pady=10)
         self.lblCantidad.grid(row=1,column=1,padx=10,pady=10)
@@ -205,13 +205,13 @@ class SubMenuExcel(Frame):#Reportes excel
         else:
             messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
     def create_widgets(self):#crea los botones y etiquetas.
-        self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="grey",command=self.enviarTotalReporte)
-        self.btnCrearLicencia=Button(self,text="Por tipo de licencia",width=100,height=3,bg="grey",command=self.enviarTipoLicenciaReporte)
-        self.btnRenovarLicencia=Button(self,text="Examen por sanción",width=100,height=3,bg="grey",command=self.enviarExamenPorSancionReporte)
-        self.btnGenerarPDF=Button(self,text="Los donantes de órganos",width=100,height=3,bg="grey")
-        self.btnReporteExcel=Button(self,text="Licencia anulada",width=100,height=3,bg="grey")
-        self.btnAcerca=Button(self,text="Licencias por sede",width=100,height=3,bg="grey")
-        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="#49A",command=self.enviarTotalReporte)
+        self.btnCrearLicencia=Button(self,text="Por tipo de licencia",width=100,height=3,bg="#49A",command=self.enviarTipoLicenciaReporte)
+        self.btnRenovarLicencia=Button(self,text="Examen por sanción",width=100,height=3,bg="#49A",command=self.enviarExamenPorSancionReporte)
+        self.btnGenerarPDF=Button(self,text="Los donantes de órganos",width=100,height=3,bg="#49A")
+        self.btnReporteExcel=Button(self,text="Licencia anulada",width=100,height=3,bg="#49A")
+        self.btnAcerca=Button(self,text="Licencias por sede",width=100,height=3,bg="#49A")
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
         self.btnCrearXML.grid(row=0,column=1,padx=10,pady=10)
         self.btnCrearLicencia.grid(row=1,column=1,padx=10,pady=10)
@@ -248,9 +248,9 @@ class SubMenuTipoLicencia(Frame):#se cambiaron las opciones
         "Licencias de conducción tipo C (autobús y taxi)","Licencias de conducir tipo D (tractores y maquinaria)",
         "Licencias tipo E (universales)"]
 
-        self.btnGenerar=Button(self,text="Generar reporte",width=50,height=3,bg="grey",command=self.crearReportePorTipoLicencia)
+        self.btnGenerar=Button(self,text="Generar reporte",width=50,height=3,bg="#49A",command=self.crearReportePorTipoLicencia)
 
-        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
         self.lblTipo.grid(row=0,column=1,padx=10,pady=10)
         self.opciones.grid(row=1,column=1,padx=10,pady=10)
@@ -270,7 +270,7 @@ class Nosotros(Frame):
  oriundo de Cartago City.",width=100,height=3)
         
 
-        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="grey",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
         self.lblNosotros.grid(row=0,column=1,padx=10,pady=10)
         self.lblFelipe.grid(row=1,column=1,padx=10,pady=10)

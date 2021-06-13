@@ -1,7 +1,7 @@
 #Tarea Programada 3
 #Elaborado por: Felipe Obando y Sebastián Bermúdez.
 #Fecha de creación: 01/06/2021
-#Última modificación: 
+#Última modificación: 12/06/2021 10:25 pm
 #Versión: 3.9.2
 
 from xml.etree.ElementTree import TreeBuilder
@@ -16,10 +16,24 @@ from archivos import *
 from importarInformacionHTML import *
 
 def formatoCedula(cedula=None):#recibe str solo para que no de error la expresion regular
+    """
+    Función: Validar formato de cédula de Costa Rica.
+    Entrada: 
+    -cedula(str): Cédula.
+    Salida:
+    -True(Bool): Formato de cédula es correcto.
+    -False(Bool): Formato de cédula es incorrecto
+    """
     if re.match("^[1-9]{1}[0-9]{8}$",cedula):
         return True
     return False
 def generarLicencias(contador):
+    """
+    Función: Crear licencias.
+    Entrada: 
+    -contador(int): Cantidad de licencias a crear.
+    Salida: generarLicencias(contador-1), hasta el contador sea 0.
+    """
     ##### CONTADOR DICE LA CANTIDAD DE PERSONAS A GENERAR #####
     if contador == 0: #acaba la recursividad
         return
@@ -94,6 +108,14 @@ def generarLicencias(contador):
     return generarLicencias(contador-1)
 
 def validarNumeroIngresado(numero=None):#En la interfaz vamos a llamar a esta función que valide el número
+    """
+    Función: Validar que el número ingresado para generar las licencias esté en el intervalo [1:250].
+    Entrada: 
+    -numero(int): Número a validar.
+    Salida:
+    -True(Bool): Si es válido.
+    -False(Bool): Si es inválido.
+    """
     #ingresado en el entry.
     try:
         numero=int(numero)
@@ -105,6 +127,18 @@ def validarNumeroIngresado(numero=None):#En la interfaz vamos a llamar a esta fu
         return False
 
 def validarLicencia(cedula=None):
+    """
+    Función: Renovar fecha de vencimiento.
+    Entrada: 
+    -cedula(int): Cédula de la licencia que se renovará en caso que se pueda.
+    Salida: 1,2,3,4 o 5. 
+    -1(int): Puntaje de licencia está entre 1 y 6, por tanto no puede renovar hasta que no 
+    repita el examen.
+    -2(int): No se puede renovar porque tiene 0 como puntaje.
+    -3(int): Renovación realizada correctamente.
+    -4(int): Formato de cédula incorrecto.
+    -5(int): La cédula no está registrada.
+    """
     today = date.today()#fecha actual
     annoActual=today.year#saca el año para revisar que sea mayor de edad.
     if formatoCedula(str(cedula))==False:
@@ -145,6 +179,9 @@ def validarLicencia(cedula=None):
     return 5#cedula no registrada
 
 def licenciaPDF(cedula):
+    """
+    Función: Crear el PDF de una licencia.
+    """
     try:
         for licencias in lee("licencias"):
             if int(cedula)==licencias.obtenerCedula():
