@@ -96,7 +96,7 @@ class CreaLicencia(Frame):
             generarLicencias(int(cantidad))
             messagebox.showinfo("Se han creado licencias", "Se han creado "+cantidad+" licencias.")
         else:
-            messagebox.showerror("Intente de nuevo", "Ha habido un error, intente de nuevo")
+            messagebox.showerror("Intente de nuevo", "El valor que ingrese debe ser un numero mayor a 1 y menor a 250")
 
     def create_widgets(self):#crea los botones y etiquetas.
         self.lblLicencia=Label(self,text="Crear licencias")
@@ -162,9 +162,12 @@ class CreaPDF(Frame):
         self.create_widgets()
 
     def enviarPDF(self):
-        if licenciaPDF(self.entryCedulaPDF.get()):
+        if licenciaPDF(self.entryCedulaPDF.get())==1:
             messagebox.showinfo("Reporte Generado","PDF creado con éxito")
             self.entryCedulaPDF.delete(0, 'end')
+        elif licenciaPDF(self.entryCedulaPDF.get())==2:
+            messagebox.showinfo("Reporte no generado","La persona con la cédula que ingresó posee un puntaje menor a 6, por lo que \
+no puede obtener su licencia.")
         else:
             messagebox.showerror("Error","Ingresó una cédula inexistente, intente de nuevo")
 
@@ -267,9 +270,7 @@ class Nosotros(Frame):
         self.lblNosotros=Label(self,text="Acerca de nosostros",width=50,height=3)
         self.lblFelipe=Label(self,text="Felipe Obando Arrieta",width=100,height=3)
         self.lblHabladaFelipe=Label(self,text="El más guapo del mundo, tiene una tremenda tula jjj,\
- oriundo de Cartago City.",width=100,height=3)
-        
-
+ oriundo de Cartago City. XDDDDDDD",width=100,height=3)
         self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
         self.lblNosotros.grid(row=0,column=1,padx=10,pady=10)
@@ -277,11 +278,9 @@ class Nosotros(Frame):
         self.lblHabladaFelipe.grid(row=2,column=1,padx=10,pady=10)
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 
-
 #trae la información del html de una vez, para tener los tipos de licencia desde el principio.
 crearListaInformacion()
 root = Tk()
 root.wm_title("Reporte de conductores")#titulo de la ventana
 app = Menu(root) 
-app.config(cursor='pirate')
 app.mainloop()

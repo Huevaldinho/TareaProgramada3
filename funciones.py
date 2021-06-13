@@ -27,6 +27,16 @@ def formatoCedula(cedula=None):#recibe str solo para que no de error la expresio
     if re.match("^[1-9]{1}[0-9]{8}$",cedula):
         return True
     return False
+
+def formatofecha(fecha=None):
+    """
+    Función: Validar fecha
+    Entrada: Fecha a validar
+    Salida: True o false
+    """
+    if re.match("\d{1,2}-\d{1,2}-\d{4}",fecha):
+        return True
+    return False
 def generarLicencias(contador):
     """
     Función: Crear licencias.
@@ -51,7 +61,7 @@ def generarLicencias(contador):
     cedula = ''.join(str(random.randint(1,9)) for i in range(9)) #crea la cedula
     nombreLicencia="Lic"+cedula #Le da el nombre al objeto
     nombreLicencia=Licencia() #crea el objeto
-    if formatoCedula(cedula): nombreLicencia.asignarCedula(int(cedula))
+    if formatoCedula(cedula): nombreLicencia.asignarCedula(int(cedula)) #asigna la cedula
 
     nombre=names.get_first_name()
     apellido1=names.get_last_name()
@@ -65,7 +75,7 @@ def generarLicencias(contador):
     random_number_of_days = random.randrange(time_between_dates.days)
     fecha=start_date + timedelta(days=random_number_of_days)
     fechaNacimiento=f"{fecha.day}-{fecha.month}-{fecha.year}"
-    nombreLicencia.asignarFechaNacimiento(fechaNacimiento) #asigna la fecha
+    if formatofecha(fechaNacimiento): nombreLicencia.asignarFechaNacimiento(fechaNacimiento) #asigna la fecha
 
     nombreLicencia.asignarFechaExpedicion(f"{date.today().day}-{date.today().month}-{date.today().year}") #fecha de hoy con formato pedido
 
@@ -185,21 +195,24 @@ def licenciaPDF(cedula):
     try:
         for licencias in lee("licencias"):
             if int(cedula)==licencias.obtenerCedula():
-                reporte=PDF('L', 'mm', (60, 135))
-                reporte.crearPDF(licencias.obtenerCedula(),
-                licencias.obtenerFechaExpedicion(),
-                licencias.obtenerFechaNacimiento(),
-                licencias.obtenerFechaVencimiento(),
-                licencias.obtenerTipoLicencia(),
-                licencias.obtenerDonador(),
-                licencias.obtenerTipoSangre(),
-                licencias.obtenerNombreCompleto(),
-                licencias.obtenerSede())
-                reporte.output("LicenciaDe"+str(licencias.obtenerCedula())+".pdf","F")
-                return True
-        return False
+                if licencias.obtenerPuntaje()>6:
+                    reporte=PDF('L', 'mm', (60, 135))
+                    reporte.crearPDF(licencias.obtenerCedula(),
+                    licencias.obtenerFechaExpedicion(),
+                    licencias.obtenerFechaNacimiento(),
+                    licencias.obtenerFechaVencimiento(),
+                    licencias.obtenerTipoLicencia(),
+                    licencias.obtenerDonador(),
+                    licencias.obtenerTipoSangre(),
+                    licencias.obtenerNombreCompleto(),
+                    licencias.obtenerSede())
+                    reporte.output("LicenciaDe"+str(licencias.obtenerCedula())+".pdf","F")
+                    return 1
+                else:
+                    return 2
+        return 0
     except:
-        return False
+        return 0
 
 if lee("licencias")==False:
     lista=[]
