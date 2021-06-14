@@ -173,7 +173,7 @@ def validarLicencia(cedula=None):
                         annoSumado=int(annoSumado)+3#sumo 3 años al año actual
                         revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))#actualiza puntaje
                         print("Fecha actualziada:",revisar.obtenerFechaVencimiento())
-                        return 3#renovación correcta
+                    
                     else:#es mayor a 25
                         now = datetime.now()
                         fechaSinAno = str(now.strftime('%d-%m-%Y'))[0:6]
@@ -181,7 +181,8 @@ def validarLicencia(cedula=None):
                         annoSumado=int(annoSumado)+5
                         revisar.asignarFechaVencimiento(fechaSinAno+str(annoSumado))#actualiza puntaje
                         print("Fecha actualziada:",revisar.obtenerFechaVencimiento())
-                        return 3#renovación correcta
+                    graba("licencias",licencias)
+                    return 3#renovación correcta
                 elif  revisar.obtenerPuntaje()==0:
                     return 2#tiene la licencia retirada permanentemente.
             else:#continua si el objeto de la lista tiene número de cédula diferente.
@@ -222,10 +223,9 @@ if lee("licencias")==False:
 else:
     #print(lee("licencias"))
     pass
-"""
+
 x=lee("licencias")
 for i in x:
     print("CEDULA",i.obtenerCedula())
     print("PUNTAJE",i.obtenerPuntaje())
     print("Fecha nacimiento:",i.obtenerFechaNacimiento(),"\n")
-"""

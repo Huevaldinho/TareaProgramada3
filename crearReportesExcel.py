@@ -78,7 +78,7 @@ def reporteTotalidadLicencias():#Función para crear el reporte de todas las lic
         hoja.append(licencia)
     try:
 
-        wb.save('totalidadLicencias.xlsx')#guarda el archivo con el nombre.
+        wb.save("totalidadLicencias"+str(fecha.strftime("%d-%m-%Y"))+".xlsx")#guarda el archivo con el nombre.
     except:
         return False
     return True
