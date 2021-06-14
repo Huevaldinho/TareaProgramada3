@@ -207,13 +207,29 @@ class SubMenuExcel(Frame):#Reportes excel
             messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
         else:
             messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+    def enviarDonantesDeOrganos(self):
+        if reporteDonanteOrganos():
+            messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
+        else:
+            messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+    def enviarPersonasAnuladas(self):
+        if reporteLicenciaAnulada():
+            messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
+        else:
+            messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+    def enviarPersonasPorSede(self):
+        root = Tk()#crea la ventana nueva para el submenu de reportes.
+        root.wm_title("Reporte por Sede")#titulo de la ventana
+        app = SubMenuSede(root) 
+        app.mainloop()
+        pass
     def create_widgets(self):#crea los botones y etiquetas.
         self.btnCrearXML=Button(self,text="Totalidad de licencias",width=100,height=3,bg="#49A",command=self.enviarTotalReporte)
         self.btnCrearLicencia=Button(self,text="Por tipo de licencia",width=100,height=3,bg="#49A",command=self.enviarTipoLicenciaReporte)
         self.btnRenovarLicencia=Button(self,text="Examen por sanción",width=100,height=3,bg="#49A",command=self.enviarExamenPorSancionReporte)
-        self.btnGenerarPDF=Button(self,text="Los donantes de órganos",width=100,height=3,bg="#49A")
-        self.btnReporteExcel=Button(self,text="Licencia anulada",width=100,height=3,bg="#49A")
-        self.btnAcerca=Button(self,text="Licencias por sede",width=100,height=3,bg="#49A")
+        self.btnGenerarPDF=Button(self,text="Los donantes de órganos",width=100,height=3,bg="#49A",command=self.enviarDonantesDeOrganos)
+        self.btnReporteExcel=Button(self,text="Personas Anuladas",width=100,height=3,bg="#49A",command=self.enviarPersonasAnuladas)
+        self.btnAcerca=Button(self,text="Licencias por sede",width=100,height=3,bg="#49A",command=self.enviarPersonasPorSede)
         self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
         self.btnCrearXML.grid(row=0,column=1,padx=10,pady=10)
@@ -259,7 +275,48 @@ class SubMenuTipoLicencia(Frame):#se cambiaron las opciones
         self.opciones.grid(row=1,column=1,padx=10,pady=10)
         self.btnGenerar.grid(row=2,column=1,padx=10,pady=10)
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
-
+class SubMenuSede(Frame):
+    def __init__(self, master=None):
+        super().__init__(master,width=320, height=170)
+        self.master = master
+        self.pack()
+        self.create_widgets()
+    def crearReporteSede(self):
+        opciones=["Sede Central, San Sebastián", "Zona Sur, Perez Zeledón",
+                "Zona Norte, San Carlos","GAM, Tránsito San Ramón","GAM, Montecillos de Alajuela",
+                "GAM, Tránsito Cartago",
+                "GAM, Barva de Heredia",
+                "Pacífico, Liberia","Pacífico, Nicoya",
+                "Puntarenas, Chacarita","Zona Sur, Río Claro de Golfito",
+                "Limón, Barrio Sandoval de Moín","Atlántico, Guápiles"]
+        if self.opciones.get() in opciones:
+            if reporteLicenciasPorSede(self.opciones.get()):
+                messagebox.showinfo("Reporte generado","Se ha generado el reporte.")
+                self.opciones.delete(0,"end")
+            else:
+                messagebox.showerror("Ha ocurrido un error","Ha ocurrido un error, debe cerrar el archivo.")
+        else:
+            messagebox.showerror("Ha ocurrido un error","Debe seleccionar una opción de la caja de opciones.")
+            self.opciones.delete(0,"end")
+    def create_widgets(self):#crea los botones y etiquetas.
+        self.lblTipo=Label(self,text="Reporte por Sede",width=50,height=3)
+        self.opciones=ttk.Combobox(self,width=55,height=5)
+        self.opciones["values"]=["Sede Central, San Sebastián", "Zona Sur, Perez Zeledón",
+                "Zona Norte, San Carlos","GAM, Tránsito San Ramón","GAM, Montecillos de Alajuela",
+                "GAM, Tránsito Cartago",
+                "GAM, Barva de Heredia",
+                "Pacífico, Liberia","Pacífico, Nicoya",
+                "Puntarenas, Chacarita","Zona Sur, Río Claro de Golfito",
+                "Limón, Barrio Sandoval de Moín","Atlántico, Guápiles"]
+        self.opciones['state']='readonly'
+        
+        self.btnGenerar=Button(self,text="Generar reporte",width=50,height=3,bg="#49A",command=self.crearReporteSede)
+        self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
+        #Lugar ubicación
+        self.lblTipo.grid(row=0,column=1,padx=10,pady=10)
+        self.opciones.grid(row=1,column=1,padx=10,pady=10)
+        self.btnGenerar.grid(row=2,column=1,padx=10,pady=10)
+        self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 class Nosotros(Frame):
     def __init__(self, master=None):
         super().__init__(master,width=320, height=170)
@@ -267,16 +324,17 @@ class Nosotros(Frame):
         self.pack()
         self.create_widgets()
     def create_widgets(self):#crea los botones y etiquetas.
+        #self.imagen_label=Label(self,image=PhotoImage(file="momo.png")).grid(row=0,column=1,padx=5,pady=5)
         self.lblNosotros=Label(self,text="Acerca de nosostros",width=50,height=3)
         self.lblFelipe=Label(self,text="Felipe Obando Arrieta",width=100,height=3)
         self.lblHabladaFelipe=Label(self,text="El más guapo del mundo, tiene una tremenda tula jjj,\
  oriundo de Cartago City. XDDDDDDD",width=100,height=3)
         self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
-        self.lblNosotros.grid(row=0,column=1,padx=10,pady=10)
-        self.lblFelipe.grid(row=1,column=1,padx=10,pady=10)
-        self.lblHabladaFelipe.grid(row=2,column=1,padx=10,pady=10)
-        self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
+        self.lblNosotros.grid(row=5,column=1,padx=10,pady=10)
+        self.lblFelipe.grid(row=6,column=1,padx=10,pady=10)
+        self.lblHabladaFelipe.grid(row=7,column=1,padx=10,pady=10)
+        self.btnSalir.grid(row=9,column=1,padx=10,pady=10)
 
 #trae la información del html de una vez, para tener los tipos de licencia desde el principio.
 #crearListaInformacion()
