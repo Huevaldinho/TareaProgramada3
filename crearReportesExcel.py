@@ -156,7 +156,6 @@ def reporteTipoLicencia(tipo):
     return True
 
 
-
 def reporteExamenSancion():
     """
     Función: Crear reporte de excel de las licencias con 0 como puntaje.

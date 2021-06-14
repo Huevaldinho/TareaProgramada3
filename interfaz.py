@@ -279,7 +279,7 @@ class Nosotros(Frame):
         self.btnSalir.grid(row=6,column=1,padx=10,pady=10)
 
 #trae la información del html de una vez, para tener los tipos de licencia desde el principio.
-crearListaInformacion()
+#crearListaInformacion()
 root = Tk()
 root.wm_title("Reporte de conductores")#titulo de la ventana
 app = Menu(root) 
