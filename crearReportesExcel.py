@@ -18,7 +18,6 @@ Si el return es 1: hubo un error al hacer el archivo(que esté abierto porbablem
 Si el return es 2: se hizo bien
 """
 ##########
-
 def reporteTotalidadLicencias():#Función para crear el reporte de todas las licencias
     """
     Función: Crear reporte de excel de totalidad de licencias.
@@ -238,6 +237,11 @@ def reporteExamenSancion():
     return 2
 
 def reporteDonanteOrganos():
+    """
+    Función: Crear reporte de excel de las personas donantes de órganos
+    Entrada: N/A.
+    Salida: N/A.
+    """
     baseDatos=lee("licencias")
     listaLicencias=[]
     for persona in baseDatos:
@@ -294,6 +298,11 @@ def reporteDonanteOrganos():
         return 1
     return 2
 def reporteLicenciaAnulada():
+    """
+    Función: Crear reporte de excel de las licencias con el puntaje igual a 0
+    Entrada: N/A.
+    Salida: N/A.
+    """
     baseDatos=lee("licencias")
     listaLicencias=[]
     for persona in baseDatos:
@@ -355,6 +364,11 @@ def reporteLicenciaAnulada():
         return 1
     return 2
 def reporteLicenciasPorSede(sede):
+    """
+    Función: Crear reporte de excel de las licencias según la sede del usuario.
+    Entrada: Sede del reporte
+    Salida: N/A.
+    """
     baseDatos=lee("licencias")
     listaLicencias=[]
     for persona in baseDatos:
