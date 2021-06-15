@@ -10,6 +10,15 @@ from openpyxl.styles import Font, Color, Alignment, Border, Side, colors,Pattern
 from archivos import *
 from clases import *
 from datetime import datetime
+
+##########
+"""
+Si el return es 0: no existen personas que cumplan para ese reporte
+Si el return es 1: hubo un error al hacer el archivo(que esté abierto porbablemente)
+Si el return es 2: se hizo bien
+"""
+##########
+
 def reporteTotalidadLicencias():#Función para crear el reporte de todas las licencias
     """
     Función: Crear reporte de excel de totalidad de licencias.
@@ -27,6 +36,9 @@ def reporteTotalidadLicencias():#Función para crear el reporte de todas las lic
         persona=(i.obtenerCedula(),i.obtenerNombreCompleto(),i.obtenerFechaNacimiento(),i.obtenerFechaExpedicion(),i.obtenerFechaVencimiento(),
         i.obtenerTipoLicencia(),i.obtenerTipoSangre(),donador,i.obtenerSede(),i.obtenerPuntaje())
         listaLicencias.append(persona)#guarda la fila (tupla) en las lista.
+
+    if listaLicencias==[]:
+        return 0
 
     fecha = datetime.now() #fecha y hora actual.
     fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
@@ -77,11 +89,10 @@ def reporteTotalidadLicencias():#Función para crear el reporte de todas las lic
     for licencia in listaLicencias:#saca los 
         hoja.append(licencia)
     try:
-
         wb.save("totalidadLicencias"+str(fecha.strftime("%d-%m-%Y"))+".xlsx")#guarda el archivo con el nombre.
     except:
-        return False
-    return True
+        return 1
+    return 2
 
 def reporteTipoLicencia(tipo):
     """
@@ -102,6 +113,8 @@ def reporteTipoLicencia(tipo):
     for licencia in baseDatos:
         if licencia.obtenerTipoLicencia() in totalLicencias[tipo]:
             listaLicencias.append((licencia.obtenerCedula(),licencia.obtenerNombreCompleto(),licencia.obtenerTipoLicencia()))
+    if listaLicencias==[]:
+        return 0
 
     fecha = datetime.now() #fecha y hora actual.
     fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
@@ -153,8 +166,8 @@ def reporteTipoLicencia(tipo):
         paraNombreReporte=tipo.replace(" ","")
         wb.save("Reporte"+paraNombreReporte.capitalize()+".xlsx")#guarda el archivo con el nombre.
     except:
-        return False
-    return True
+        return 1
+    return 2
 
 
 def reporteExamenSancion():
@@ -170,7 +183,8 @@ def reporteExamenSancion():
     for licencia in baseDatos:
         if licencia.obtenerPuntaje()<=6 and licencia.obtenerPuntaje()!=0:
             listaLicencias.append((licencia.obtenerCedula(),licencia.obtenerNombreCompleto(),licencia.obtenerTipoLicencia(),licencia.obtenerPuntaje()))
-
+    if listaLicencias==[]:
+        return 0
     fecha = datetime.now() #fecha y hora actual.
     fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
     
@@ -220,8 +234,8 @@ def reporteExamenSancion():
     try:
         wb.save("ReporteExamenPorSancion"+".xlsx")#guarda el archivo con el nombre.
     except:
-        return False
-    return True
+        return 1
+    return 2
 
 def reporteDonanteOrganos():
     baseDatos=lee("licencias")
@@ -229,7 +243,8 @@ def reporteDonanteOrganos():
     for persona in baseDatos:
         if persona.obtenerDonador()==True:###
             listaLicencias.append((persona.obtenerCedula(),persona.obtenerNombreCompleto(),persona.obtenerTipoLicencia()))###
-
+    if listaLicencias==[]:
+        return 0
     fecha = datetime.now() #fecha y hora actual.
     fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
 
@@ -276,8 +291,8 @@ def reporteDonanteOrganos():
     try:
         wb.save("ReportePersonasDonantes"+".xlsx")#guarda el archivo con el nombre.###
     except:
-        return False
-    return True
+        return 1
+    return 2
 def reporteLicenciaAnulada():
     baseDatos=lee("licencias")
     listaLicencias=[]
@@ -289,7 +304,8 @@ def reporteLicenciaAnulada():
                 donador="No"
             listaLicencias.append((persona.obtenerCedula(),persona.obtenerNombreCompleto(),persona.obtenerFechaNacimiento(),persona.obtenerFechaExpedicion(),
             persona.obtenerFechaVencimiento(),persona.obtenerTipoLicencia(),persona.obtenerTipoSangre(),donador,persona.obtenerSede()))###
-
+    if listaLicencias==[]:
+        return 0
     fecha = datetime.now() #fecha y hora actual.
     fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
 
@@ -336,8 +352,8 @@ def reporteLicenciaAnulada():
     try:
         wb.save("ReportePersonasAnuladas"+".xlsx")#guarda el archivo con el nombre.###
     except:
-        return False
-    return True
+        return 1
+    return 2
 def reporteLicenciasPorSede(sede):
     baseDatos=lee("licencias")
     listaLicencias=[]
@@ -349,7 +365,8 @@ def reporteLicenciasPorSede(sede):
                 donador="No"
             listaLicencias.append((persona.obtenerCedula(),persona.obtenerNombreCompleto(),persona.obtenerFechaNacimiento(),persona.obtenerFechaExpedicion(),
             persona.obtenerFechaVencimiento(),persona.obtenerTipoLicencia(),persona.obtenerTipoSangre(),donador,persona.obtenerSede(),str(persona.obtenerPuntaje())))###
-
+    if listaLicencias==[]:
+        return 0
     fecha = datetime.now() #fecha y hora actual.
     fechaFormato = "Fecha y hora de creación: "+str(fecha.strftime("%d/%m/%Y, %H:%M:%S"))#para usar en el excel.
 
@@ -397,5 +414,5 @@ def reporteLicenciasPorSede(sede):
         paraNombre2=paraNombre.replace(" ","")
         wb.save("ReportePersonasDe"+paraNombre2+".xlsx")#guarda el archivo con el nombre.###
     except:
-        return False
-    return True
+        return 1
+    return 2

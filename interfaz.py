@@ -192,10 +192,12 @@ class SubMenuExcel(Frame):#Reportes excel
         self.create_widgets()
 
     def enviarTotalReporte(self):
-        if reporteTotalidadLicencias():
+        if reporteTotalidadLicencias()==2:
             messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
-        else:
+        elif reporteTotalidadLicencias()==1:
             messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+        else:
+            messagebox.showwarning("No se pudo crear el archivo","No existen personas que cumplan sus parámetros de búsqueda.")
     def enviarTipoLicenciaReporte(self):
         root = Tk()#crea la ventana nueva para el submenu de reportes.
         root.wm_title("Reporte por tipo de licencia")#titulo de la ventana
@@ -203,20 +205,26 @@ class SubMenuExcel(Frame):#Reportes excel
         app.mainloop()
         pass
     def enviarExamenPorSancionReporte(self):
-        if reporteExamenSancion():
+        if reporteExamenSancion()==2:
             messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
-        else:
+        elif reporteExamenSancion()==1:
             messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+        else:
+            messagebox.showwarning("No se pudo crear el archivo","No existen personas que cumplan sus parámetros de búsqueda.")
     def enviarDonantesDeOrganos(self):
-        if reporteDonanteOrganos():
+        if reporteDonanteOrganos()==2:
             messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
-        else:
+        elif reporteDonanteOrganos()==1:
             messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+        else:
+            messagebox.showwarning("No se pudo crear el archivo","No existen personas que cumplan sus parámetros de búsqueda.")
     def enviarPersonasAnuladas(self):
-        if reporteLicenciaAnulada():
+        if reporteLicenciaAnulada()==2:
             messagebox.showinfo("Reporte creado","Se ha creado el reporte.")
-        else:
+        elif reporteLicenciaAnulada()==1:
             messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
+        else:
+            messagebox.showwarning("No se pudo crear el archivo","No existen personas que cumplan sus parámetros de búsqueda.")
     def enviarPersonasPorSede(self):
         root = Tk()#crea la ventana nueva para el submenu de reportes.
         root.wm_title("Reporte por Sede")#titulo de la ventana
@@ -254,11 +262,13 @@ class SubMenuTipoLicencia(Frame):#se cambiaron las opciones
             messagebox.showerror("Ha ocurrido un error","Debe seleccionar una opción de la caja de opciones.")
             self.opciones.delete(0,"end")
         else:
-            if reporteTipoLicencia(self.opciones.get()):#crarReporetesExcel.py
+            if reporteTipoLicencia(self.opciones.get())==2:#crarReporetesExcel.py
                 messagebox.showinfo("Reporte generado","Se ha generado el reporte.")
                 self.opciones.delete(0,"end")
+            elif reporteTipoLicencia(self.opciones.get())==1:
+                messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
             else:
-                messagebox.showerror("Ha ocurrido un error","Ha ocurrido un error, debe cerrar el archivo.")
+                messagebox.showwarning("No se pudo crear el archivo","No existen personas que cumplan sus parámetros de búsqueda.")
         return
     def create_widgets(self):#crea los botones y etiquetas.
         self.lblTipo=Label(self,text="Tipo de licencia",width=50,height=3)
@@ -290,11 +300,13 @@ class SubMenuSede(Frame):
                 "Puntarenas, Chacarita","Zona Sur, Río Claro de Golfito",
                 "Limón, Barrio Sandoval de Moín","Atlántico, Guápiles"]
         if self.opciones.get() in opciones:
-            if reporteLicenciasPorSede(self.opciones.get()):
+            if reporteLicenciasPorSede(self.opciones.get())==2:#crarReporetesExcel.py
                 messagebox.showinfo("Reporte generado","Se ha generado el reporte.")
                 self.opciones.delete(0,"end")
+            elif reporteLicenciasPorSede(self.opciones.get())==1:
+                messagebox.showwarning("Aviso de creación","El archivo está abierto, cierrelo para continuar")
             else:
-                messagebox.showerror("Ha ocurrido un error","Ha ocurrido un error, debe cerrar el archivo.")
+                messagebox.showwarning("No se pudo crear el archivo","No existen personas que cumplan sus parámetros de búsqueda.")
         else:
             messagebox.showerror("Ha ocurrido un error","Debe seleccionar una opción de la caja de opciones.")
             self.opciones.delete(0,"end")
@@ -324,7 +336,6 @@ class Nosotros(Frame):
         self.pack()
         self.create_widgets()
     def create_widgets(self):#crea los botones y etiquetas.
-        #self.imagen_label=Label(self,image=PhotoImage(file="momo.png")).grid(row=0,column=1,padx=5,pady=5)
         self.lblNosotros=Label(self,text="Acerca de nosostros",width=50,height=3)
         self.lblFelipe=Label(self,text="Felipe Obando Arrieta",width=100,height=3)
         self.lblHabladaFelipe=Label(self,text="El más guapo del mundo, tiene una tremenda tula jjj,\
