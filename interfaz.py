@@ -121,7 +121,6 @@ class RenovarLicencia(Frame):
     def renovacion(self):
         cedula=self.entryLicencia.get()#trae el entry.
         retorna=validarLicencia(cedula)
-        print("Está retornando",retorna)
         if retorna==1:#puntaje entre 1-6
             messagebox.showerror("Ha habido un error","Debido a su puntaje, debe realizar el examen otra vez.")
         elif retorna==2:#puntaje 0
@@ -338,8 +337,7 @@ class Nosotros(Frame):
     def create_widgets(self):#crea los botones y etiquetas.
         self.lblNosotros=Label(self,text="Acerca de nosostros",width=50,height=3)
         self.lblFelipe=Label(self,text="Felipe Obando Arrieta",width=100,height=3)
-        self.lblHabladaFelipe=Label(self,text="El más guapo del mundo, tiene una tremenda tula jjj,\
- oriundo de Cartago City. XDDDDDDD",width=100,height=3)
+        self.lblHabladaFelipe=Label(self,text="Holi, soy Felipe.",width=100,height=3)
         self.btnSalir=Button(self,text="Salir",width=100,height=3,bg="#49A",command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
         self.lblNosotros.grid(row=5,column=1,padx=10,pady=10)
