@@ -84,7 +84,7 @@ def obtenerComentarios():
             else:
                 comentarioTexto.append(n.text)
         contadorCategoria+=1
-    comentarioTexto.append(comentarios[78].text)    
+    comentarioTexto.append(comentarios[78].text)
     return comentarioTexto
 def obtenerRequisitos():
     """
@@ -124,11 +124,13 @@ def crearListaInformacion():
     comentarios=obtenerComentarios()
     requisitos=obtenerRequisitos()
     A=[categorias[0],[subCategorias[0],subCategorias[1],subCategorias[2]],[comentarios[0],comentarios[1],comentarios[2]],[requisitos[0],requisitos[1],requisitos[2]]]
-    B=[categorias[1],[subCategorias[3],subCategorias[4],subCategorias[5],subCategorias[6]],[[comentarios[3],comentarios[4],comentarios[5],comentarios[6]],comentarios[7],comentarios[8],comentarios[9]],[requisitos[3],requisitos[4],requisitos[5],requisitos[6]]]
+    B=[categorias[1],[subCategorias[3],subCategorias[4],subCategorias[5],subCategorias[6]],[comentarios[3]+" "+comentarios[4]+" "+comentarios[5]+" "+comentarios[6],comentarios[7],comentarios[8],comentarios[9]],[requisitos[3],requisitos[4],requisitos[5],requisitos[6]]]
     C=[categorias[2],[subCategorias[7],subCategorias[8]],[comentarios[10],comentarios[11]],[requisitos[7],requisitos[8]]]
-    D=[categorias[3],[subCategorias[9],subCategorias[10],subCategorias[11]],[comentarios[14],comentarios[15],comentarios[16]],requisitos[9]]
+    D=[categorias[3],[subCategorias[9],subCategorias[10],subCategorias[11]],[comentarios[14],comentarios[15],comentarios[16]],[requisitos[9],requisitos[9],requisitos[9]]]
     E=[categorias[4],[subCategorias[12],subCategorias[13]],[comentarios[17],comentarios[18]],[requisitos[10],requisitos[11]]]
     #Lista de subCategorias de licencias.
     graba("informacionLicencias",[A,B,C,D,E])#Graba toda la información de la página.
     #[[Tipo,[Subtipos],[comentarios],[requisitos]],[Tipo,[Subtipos],[comentarios],[requisitos]]...]
     return
+
+#crearListaInformacion()
