@@ -1,6 +1,6 @@
 #Elaborado por: Felipe Obando y Sebastián Bermúdez.
 #Fecha de creación: 01/06/2021
-#Última modificación: 12/06/2021 10:25 pm
+#Última modificación: 20/06/2021 10:25 pm
 #Versión: 3.9.2
 
 #CLASE LICENCIA
