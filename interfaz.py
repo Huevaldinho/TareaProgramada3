@@ -301,7 +301,7 @@ class SubMenuTipoLicencia(Frame):#se cambiaron las opciones
         self.opciones["values"]=["Licencias de conducir tipo A (motocicletas)","Licencias de conducir tipo B (automóviles y camiones)",
         "Licencias de conducción tipo C (autobús y taxi)","Licencias de conducir tipo D (tractores y maquinaria)",
         "Licencias tipo E (universales)"]
-
+        self.opciones['state']='readonly'
         self.btnGenerar=Button(self,text="Generar reporte",width=20,command=self.crearReportePorTipoLicencia)
         self.btnSalir=Button(self,text="Salir",width=20,command=self.master.destroy)#ESTA CIERRA SOLA LA OTRA VENTANA
         #Lugar ubicación
@@ -363,7 +363,7 @@ class Nosotros(Frame):
         self.lblSebastian=Label(self,text="Sebastián Bermúdez Acuña",font=("BiauKai",23,),bg='cyan').place(relx=0.5,rely=0.2,anchor=CENTER)
         self.lblCarneDios=Label(self,text="2021110666",font=("TimesNewRoman",18,"italic"),bg='cyan').place(relx=0.5,rely=0.3,anchor=CENTER)
         self.lblFelipe=Label(self,text="Felipe Obando Arrieta",font=("BiauKai",23,),bg='cyan').place(relx=0.5,rely=0.5,anchor=CENTER)
-        self.lblCarneFelipe=Label(self,text="3 semanas sin bañarse: juega dota",font=("TimesNewRoman",18,"italic"),bg='cyan').place(relx=0.5,rely=0.6,anchor=CENTER)
+        self.lblCarneFelipe=Label(self,text="2021035489",font=("TimesNewRoman",18,"italic"),bg='cyan').place(relx=0.5,rely=0.6,anchor=CENTER)
         self.btnSalir=Button(self,text="Salir",width=30,height=3,command=self.master.destroy).place(relx=0.5,rely=0.8,anchor=CENTER)
 
 #trae la información del html de una vez, para tener los tipos de licencia desde el principio.

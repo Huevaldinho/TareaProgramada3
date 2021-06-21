@@ -23,12 +23,17 @@ def crearXML():
     contadorCategoria=0
     for tipo in range(len(info)):#ciclo para los tipos de licencia
         tipoLicencia = ET.SubElement(licencias,'tipoLicencia',name=info[contadorCategoria][0])#Crea el tipo de licencia
+        print("\nTipo:",info[contadorCategoria][0])
         for subTipo in range(len(info[tipo][1])):#Ciclo para cada subtipo de licencia
             subcategoria= ET.SubElement(tipoLicencia,"subTipo",name=info[tipo][1][subTipo])#Agrega el nombre del subtipo
+            print("Subtipo:",info[tipo][1][subTipo])
             comentario=ET.SubElement(subcategoria,"comentario")#Comentario del subtipo
             comentario.text = info[tipo][2][subTipo]#Agrega el comentario
+            print("Comentario:",comentario.text)
             requisito=ET.SubElement(subcategoria,"requisito")#Requisito del subtipo
             requisito.text = info[tipo][3][subTipo]#Agrega el requisito
+            print("Requisito:",requisito.text,"\n")
+
         contadorCategoria+=1#Aumenta el contador para la categoria.
     arbol = ET.ElementTree(licencias)#trae todo lo que está en licencia.
     arbol.write("XML.xml")#crea el xml
