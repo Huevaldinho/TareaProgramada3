@@ -3,13 +3,26 @@
 #Última modificación: 20/06/2021 10:25 pm
 #Versión: 3.9.2
 
+
+
+
+"""
+
+:D
+:D
+:D
+:D
+
+"""
+
+
 #CLASE LICENCIA
 class Licencia:
     """
     Función: Crear un objeto con atributos: cédula, nombre completo, fecha de nacimiento,
     fecha de expedición de la licencia, fecha de vencimiento de la licencia, tipo de licencia,
     tipo de sangre, donador, sede, puntaje y correo.
-    """
+    """ 
     def __init__(self):
         self.cedula=""
         self.nombreCompleto=""
